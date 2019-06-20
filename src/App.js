@@ -7,6 +7,8 @@ import Footer from './Footer';
 import LogInModal from './LogInModal';
 import VotingPanel from './VotingPanel';
 
+const socket = new WebSocket('ws://sp-websocket.herokuapp.com');
+
 class App extends React.Component {
 
   constructor(props) {
@@ -17,6 +19,10 @@ class App extends React.Component {
       editUser: '',
       avatar: ''
     };
+
+    socket.onmessage = function (event) {
+      console.log(event.data);
+    }
   }
 
   helloUser = (userId, userName, userAvatar) => {
@@ -36,15 +42,10 @@ class App extends React.Component {
   }
 
   sendWsPing = () => {
-    let ws = new WebSocket('ws://sp-websocket.herokuapp.com');
-    ws.ping = function() {
-      let test = {'test': true}
-    };
-    console.log('sent')
+    socket.send({ clicked: true });
   }
 
   render() {
-
     var me = {
       userId: window.localStorage.getItem('id'),
       name: window.localStorage.getItem('name'),
