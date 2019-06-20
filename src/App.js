@@ -35,6 +35,14 @@ class App extends React.Component {
     });
   }
 
+  sendWsPing = () => {
+    let ws = new WebSocket('ws://sp-websocket.herokuapp.com');
+    ws.ping = function() {
+      let test = {'test': true}
+    };
+    console.log('sent')
+  }
+
   render() {
 
     var me = {
@@ -60,8 +68,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className="app-board">
-          <Header myUser={me} />
+        <div className="app-board" onClick={this.sendWsPing} >
+          <Header myUser={me}/>
           <main className="row">
             <TeamMenu 
               team={team}

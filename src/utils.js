@@ -11,10 +11,3 @@ export function fetchMyUser(){
     return myUser
   } 
 }
-
-export function setupBoard(){
-  var winH = window.innerHeight;
-  var margins = 20;
-  var board = document.querySelector('.app-board');
-  board.style.height = (winH - margins) + 'px';
-}
