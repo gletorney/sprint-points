@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const TeamRow = ({ teamMemberName, teamMemberAvatar}) => ( 
   <div className="pad-left-10 pad-top-5 pad-bottom-5 border-bottom-1-ccc">

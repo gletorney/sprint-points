@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SelectIcon from './SelectIcon';
-import { relative } from 'path';
 
 class LogIn extends React.Component {
 
@@ -52,8 +51,7 @@ class LogIn extends React.Component {
   }
 
   render() {
-    var team = decodeURIComponent(window.location.hash);
-    var team = team.replace('#','');
+    var team = decodeURIComponent(window.location.hash).replace('#','');
 
     return (
       <div className="overlay">

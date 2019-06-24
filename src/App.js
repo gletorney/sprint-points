@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import { fetchMyUser } from './utils';
+import React from 'react';
+//import { fetchMyUser } from './utils';
 import Header from './Header';
 import TeamMenu from './TeamMenu';
 import CardSet from './CardSet';
 import Footer from './Footer';
 import LogInModal from './LogInModal';
 import VotingPanel from './VotingPanel';
-
-const socket = new WebSocket('ws://sp-websocket.herokuapp.com');
 
 class App extends React.Component {
 
@@ -19,9 +17,10 @@ class App extends React.Component {
       editUser: '',
       avatar: ''
     };
-
-    socket.onmessage = function (event) {
-      console.log(event.data);
+    this.hasTeam = window.location.hash;
+    this.socket = new WebSocket('wss://sp-websocket.herokuapp.com', this.hasTeam);
+    this.socket.onmessage = function(msg) {
+      console.log(msg);
     }
   }
 
@@ -41,24 +40,25 @@ class App extends React.Component {
     });
   }
 
-  sendWsPing = () => {
-    socket.send({ clicked: true });
+  sendPing = () => {
+    let socket = this.socket;
+    var message = {
+      type: "date sent - received",
+      date: Date.now()
+    };
+    socket.send(JSON.stringify(message));
   }
 
   render() {
+
     var me = {
       userId: window.localStorage.getItem('id'),
       name: window.localStorage.getItem('name'),
       avatar: window.localStorage.getItem('avatar')
     }
   
-    let hasTeam = window.location.hash;
-
-    var readyToPlay;
-    if (me.userId && hasTeam && this.state.editUser != 1){
+    if (me.userId && this.hasTeam && this.state.editUser !== 1){
       var readyToPlay = true
-    } else {
-      var readyToPlay = false
     }
 
     let team = [
@@ -69,7 +69,10 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className="app-board" onClick={this.sendWsPing} >
+        <div className="app-board">
+          <span onClick={this.sendPing}>
+            CLICK
+          </span>
           <Header myUser={me}/>
           <main className="row">
             <TeamMenu 

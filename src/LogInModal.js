@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LogIn from './LogIn';
 import CreateTeam from './CreateTeam';
 
