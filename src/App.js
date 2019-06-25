@@ -12,16 +12,31 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //me
-    const myUser = fetchMyUser() || null;
+    const myUser = fetchMyUser();
     this.state = { 
+      board: [],
+      isVoting: 'on',
+      isAdmin: 'off',
       me: myUser,
       team: '',
-      votes: '',
-      isVoting: 'on',
-      isAdmin: 'off'
     };
-    //my team
-    this.socket = connectToSocket(window.location.hash);
+
+    this.socket = connectToSocket(window.location.hash);    
+    console.log(this.socket)
+  }
+
+  componentDidMount() {
+    const me = this.state.me;
+    this.socket.onopen = function (event) {
+      this.send(JSON.stringify(me));
+    };
+    this.socket.onmessage = function(event) {
+      const data = event.data;
+      this.setState = {
+        board: data
+      }
+      console.log('incoming data = '+data)
+    };
   }
 
   helloUser = (userId, userName, userAvatar) => {
@@ -33,6 +48,10 @@ class App extends React.Component {
     this.setState({ 
       me: updatedUser      
     });
+    let socket = this.socket;
+    socket.onopen = function (event) {
+      socket.send(JSON.stringify(updatedUser));
+    };
   }
 
   handleEditUser = () => {
@@ -41,13 +60,11 @@ class App extends React.Component {
     });
   }
 
-  sendPing = () => {
+  sendPing = (myUser) => {
     let socket = this.socket;
-    var message = {
-      type: "Ping",
-      date: Date.now()
+    socket.onopen = function (event) {
+      socket.send(JSON.stringify(myUser));
     };
-    socket.send(JSON.stringify(message));
   }
 
   render() {
@@ -59,13 +76,8 @@ class App extends React.Component {
 
     if (myUser.name && teamName && this.state.editUser !== 1){
       var readyToPlay = true
+      this.sendPing(myUser);
     }
-
-    let team = [
-      {'id' : 2, 'name': 'Groot', 'avatar': 'icofont-bat', 'score': 8 },
-      {'id' : 3, 'name': 'Star-lord','avatar': 'icofont-pineapple','score': 2},
-      {'id' : 4, 'name': 'Gamora','avatar': 'icofont-butterfly','score': 5}
-    ]
 
     return (
       <div>
@@ -76,12 +88,12 @@ class App extends React.Component {
           <Header myUser={myUser}/>
           <main className="row">
             <TeamMenu 
-              team={team}
+              team={this.state.board}
               myUser={myUser}
               onEditUser={this.handleEditUser}
             />
-            <CardSet team={team} votingState={this.state.isVoting} />
-            <VotingPanel />
+            <CardSet board={this.state.board} votingState={this.state.isVoting} />
+            <VotingPanel socket={this.socket} myUser={this.state.me} />
           </main>
         </div>
         {readyToPlay ? ( 

@@ -2,7 +2,7 @@ import React from 'react';
 
 class SelectIcon extends React.Component {
 
-  closeSelectionModal = () =>{
+  closeSelectionModal = () => {
     let iconsElem = document.querySelector("#SelectIcon");
     let formElem = document.querySelector("#JoinTeam");
     iconsElem.classList.remove("show");

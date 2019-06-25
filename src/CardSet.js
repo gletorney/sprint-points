@@ -3,10 +3,10 @@ import Card from './Card';
 
 class CardSet extends React.Component {
   render() {
-    const { team } = this.props;
+    const { board } = this.props;
     return (
       <div id="CardsRow" className="cardsrow center-col background-eee marg-bottom-20">
-        {team.map(
+        {board.map(
           (card, i) =>
             <Card 
               key={card.id}

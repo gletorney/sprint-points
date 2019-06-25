@@ -13,9 +13,6 @@ export function fetchMyUser(){
 export function connectToSocket(team){
   if (team){
     let socket = new WebSocket('wss://sp-websocket.herokuapp.com', team);
-    socket.onmessage = function(msg) {
-      console.log(msg);
-    }
     return socket;
   }
 }
