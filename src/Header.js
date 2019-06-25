@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Header extends React.Component {
-
+  
   handleEditUser = () => {
     this.props.onEditUser();
   }
@@ -20,4 +20,5 @@ class Header extends React.Component {
     )
   }
 }
+
 export default Header;

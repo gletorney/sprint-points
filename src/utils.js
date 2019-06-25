@@ -1,13 +1,21 @@
 export function fetchMyUser(){
-  let userId = window.localStorage.getItem('id'); 
-  let myName = window.localStorage.getItem('name'); 
-  let myColor = window.localStorage.getItem('color'); 
-  if (myName){
-    const myUser = {
-      userId: userId,
-      name: myName,
-      color: myColor
+  let userId = window.localStorage.getItem('id') || ''; 
+  let myName = window.localStorage.getItem('name') || ''; 
+  let myAvatar = window.localStorage.getItem('avatar') || ''; 
+  const myUser = {
+    id: userId,
+    name: myName,
+    avatar: myAvatar,
+  };
+  return myUser
+}
+
+export function connectToSocket(team){
+  if (team){
+    let socket = new WebSocket('wss://sp-websocket.herokuapp.com', team);
+    socket.onmessage = function(msg) {
+      console.log(msg);
     }
-    return myUser
-  } 
+    return socket;
+  }
 }

@@ -7,7 +7,7 @@ class LogInModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      team: ''
+      team: window.location.hash
     };
   }
 
@@ -20,7 +20,7 @@ class LogInModal extends React.Component {
   }
 
   render() {
-    const teamName = this.state.team || window.location.hash;
+    const teamName = this.state.team;
     return ( 
       <div className="overlay">
         <div className="modal">

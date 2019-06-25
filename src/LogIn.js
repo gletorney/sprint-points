@@ -11,36 +11,27 @@ class LogIn extends React.Component {
       avatar: ''
     };
   }
-  
-  handleNameInput = (e) => {
-    let inputVal = e.target.value;
+
+  createUser = () => {
+    let nameValue = document.getElementById('NameInput').value;
+    let avatarValue = document.getElementById('AvatarInput').value;
     let userId = new Date().getTime(); 
     this.setState({
       id: userId,
-      name: inputVal
+      name: nameValue,
+      avatar: avatarValue
     });
-  }
 
-  handleAvatarInput = (e) => {
-    let inputVal = e.target.value;
-    this.setState({
-      avatar: inputVal
-    });
-  }
-
-  createUser = () => {
-    let userId = this.state.id;
-    let userName = this.state.name;
-    let userAvatar = this.state.avatar;
-    if (userName.length < 1){
-      let elem = document.querySelector("input[type='text']");
+    if (nameValue.length < 1){
+      let elem = document.querySelector("#NameInput");
       elem.style.borderLeft = '6px solid red';
-      elem.style.avatar = 'red';
+      elem.style.color = 'red';
     }
-    this.props.onAddUser(userId, userName, userAvatar);
     window.localStorage.setItem('id', userId); 
-    window.localStorage.setItem('name', userName); 
-    window.localStorage.setItem('avatar', userAvatar); 
+    window.localStorage.setItem('name', nameValue); 
+    window.localStorage.setItem('avatar', avatarValue); 
+
+    this.props.onAddUser(userId, nameValue, avatarValue);
   }
 
   showSelectIcon = () => {
@@ -63,8 +54,8 @@ class LogIn extends React.Component {
             </div>
             &mdash;
           </div>
-          <input type="text" placeholder="Your name" onChange={this.handleNameInput} className="display-block"></input>
-          <input id="AvatarClass" type="hidden" value="icofont-pizza-slice" placeholder="avatar code (#111)" onChange={this.handleAvatarInput} className="display-block marg-top-10"></input>
+          <input id="NameInput" type="text" placeholder="Your name" className="display-block"></input>
+          <input id="AvatarInput" type="hidden" value="icofont-pizza-slice" placeholder="avatar code (#111)" className="display-block marg-top-10"></input>
           <div className="pad-top-10 cursor-pointer line-height1-4" onClick={this.showSelectIcon}>
             <span className="font-1-6 pad-10 border-1-ccc display-inline-block rnd-button marg-top-5">
               <i id="IconPreview" className="icofont-pizza-slice"></i>

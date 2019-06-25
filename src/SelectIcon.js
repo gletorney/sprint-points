@@ -10,14 +10,13 @@ class SelectIcon extends React.Component {
   }
 
   handleSelectIcon = (event, className) => {
-    let AvatarInput = document.querySelector("#AvatarClass");
+    let AvatarInput = document.querySelector("#AvatarInput");
     let IconPreview = document.querySelector("#IconPreview");
 
     AvatarInput.value = className;
     IconPreview.setAttribute('class', className)
 
     this.closeSelectionModal();
-    console.log(className)
   }
 
   render() {

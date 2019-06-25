@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-//import { setupBoard } from './utils';
 import App from './App';
 import './App.css';
 import './Icofont.min.css';

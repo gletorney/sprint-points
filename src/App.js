@@ -1,5 +1,5 @@
 import React from 'react';
-//import { fetchMyUser } from './utils';
+import { fetchMyUser,connectToSocket } from './utils';
 import Header from './Header';
 import TeamMenu from './TeamMenu';
 import CardSet from './CardSet';
@@ -11,26 +11,27 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      id: '',
-      name: '',
-      editUser: '',
-      avatar: ''
+    //me
+    const myUser = fetchMyUser() || null;
+    this.state = { 
+      me: myUser,
+      team: '',
+      votes: '',
+      isVoting: 'on',
+      isAdmin: 'off'
     };
-    this.hasTeam = window.location.hash;
-    this.socket = new WebSocket('wss://sp-websocket.herokuapp.com', this.hasTeam);
-    this.socket.onmessage = function(msg) {
-      console.log(msg);
-    }
+    //my team
+    this.socket = connectToSocket(window.location.hash);
   }
 
   helloUser = (userId, userName, userAvatar) => {
-    this.setState({ 
+    let updatedUser = {
       id: userId,
       name: userName,
-      avatar: userAvatar,
-      editUser: '',
-      voting: 0
+      avatar: userAvatar
+    }
+    this.setState({ 
+      me: updatedUser      
     });
   }
 
@@ -43,21 +44,20 @@ class App extends React.Component {
   sendPing = () => {
     let socket = this.socket;
     var message = {
-      type: "date sent - received",
+      type: "Ping",
       date: Date.now()
     };
     socket.send(JSON.stringify(message));
   }
 
   render() {
+    const {
+      me: myUser
+    } = this.state;
 
-    var me = {
-      userId: window.localStorage.getItem('id'),
-      name: window.localStorage.getItem('name'),
-      avatar: window.localStorage.getItem('avatar')
-    }
-  
-    if (me.userId && this.hasTeam && this.state.editUser !== 1){
+    const teamName = window.location.hash;
+
+    if (myUser.name && teamName && this.state.editUser !== 1){
       var readyToPlay = true
     }
 
@@ -73,14 +73,14 @@ class App extends React.Component {
           <span onClick={this.sendPing}>
             CLICK
           </span>
-          <Header myUser={me}/>
+          <Header myUser={myUser}/>
           <main className="row">
             <TeamMenu 
               team={team}
-              myUser={me}
+              myUser={myUser}
               onEditUser={this.handleEditUser}
             />
-            <CardSet team={team} votingState={this.state.voting} />
+            <CardSet team={team} votingState={this.state.isVoting} />
             <VotingPanel />
           </main>
         </div>
