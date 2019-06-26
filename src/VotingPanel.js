@@ -1,10 +1,6 @@
 import React from 'react';
 
-class VotingPanel extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
-  // }   
+class VotingPanel extends React.Component { 
 
   sendPing = (e, web) => {
     var score = e.target.value;
@@ -15,9 +11,9 @@ class VotingPanel extends React.Component {
     web.socket.send(JSON.stringify(message));
   }
 
-    render() {
-      const socket = this.props;
-      return (
+  render() {
+    const socket = this.props;
+    return (
       <div className="right-col">
         <div className="bold font-1-3 pad-20 border-bottom-1-ccc">
           Vote

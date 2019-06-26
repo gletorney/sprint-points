@@ -2,9 +2,9 @@ import React from 'react';
 
 class Card extends React.Component {
   render() {
-    const {name, avatar, score} = this.props;
+    const {id, name, avatar, score} = this.props;
     return (
-      <div key="{name}" className='card background-fff'>
+      <div key={name} id={id} className='card background-fff'>
         {this.props.voting ? (
           <div className='card-score height-100'>{score}</div>
         ) : (

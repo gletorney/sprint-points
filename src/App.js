@@ -22,20 +22,12 @@ class App extends React.Component {
     };
 
     this.socket = connectToSocket(window.location.hash);    
-    console.log(this.socket)
   }
 
   componentDidMount() {
     const me = this.state.me;
     this.socket.onopen = function (event) {
       this.send(JSON.stringify(me));
-    };
-    this.socket.onmessage = function(event) {
-      const data = event.data;
-      this.setState = {
-        board: data
-      }
-      console.log('incoming data = '+data)
     };
   }
 
@@ -92,7 +84,7 @@ class App extends React.Component {
               myUser={myUser}
               onEditUser={this.handleEditUser}
             />
-            <CardSet board={this.state.board} votingState={this.state.isVoting} />
+            <CardSet myUser={myUser} socket={this.socket} board={this.state.board} votingState={this.state.isVoting} />
             <VotingPanel socket={this.socket} myUser={this.state.me} />
           </main>
         </div>
