@@ -5,8 +5,9 @@ class VotingPanel extends React.Component {
   sendPing = (e, web) => {
     var score = e.target.value;
     var message = {
-      user: this.props.myUser,
-      score: score
+      id: this.props.myUser.id,
+      score: score,
+      type: 'vote'
     };
     web.socket.send(JSON.stringify(message));
   }

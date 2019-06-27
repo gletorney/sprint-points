@@ -21,18 +21,23 @@ class App extends React.Component {
       team: '',
     };
 
-    this.socket = connectToSocket(window.location.hash);    
+    this.socket = connectToSocket();    
   }
 
   componentDidMount() {
     const me = this.state.me;
     this.socket.onopen = function (event) {
-      this.send(JSON.stringify(me));
+      this.send(
+        JSON.stringify(
+            { ...me, type: 'hello-user' }
+          )
+        )
     };
   }
 
   helloUser = (userId, userName, userAvatar) => {
     let updatedUser = {
+      type: 'hello-user',
       id: userId,
       name: userName,
       avatar: userAvatar
@@ -68,15 +73,11 @@ class App extends React.Component {
 
     if (myUser.name && teamName && this.state.editUser !== 1){
       var readyToPlay = true
-      this.sendPing(myUser);
     }
 
     return (
       <div>
         <div className="app-board">
-          <span onClick={this.sendPing}>
-            CLICK
-          </span>
           <Header myUser={myUser}/>
           <main className="row">
             <TeamMenu 

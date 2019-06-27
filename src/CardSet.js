@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import { parseMessage } from './utils';
 
 class CardSet extends React.Component {
 
@@ -7,37 +8,33 @@ class CardSet extends React.Component {
     super(props);
     let data = this.props.myUser;
     this.state = {
-      play: [data]
+      players: [data]
     }
-  } 
+    console.log('constructor - this.state.players=',this.state.players);
+  }
 
   componentDidMount() {
     const socket = this.props.socket;
-    socket.onmessage = function(event) {
-      const data = event.data;
-      this.setState = {
-        play: [data]
-      }
+    const myUser = this.props.myUser;
+    socket.onmessage = (event) => {
+      const newPlayerAction = JSON.parse(event.data);
+      this.setState((prevState) => {
+        const currentPlayers = prevState.players;
+        const players = parseMessage(currentPlayers, newPlayerAction, myUser);
+        console.log('setState players', players)
+        return {
+          players
+        }
+      })
     };
-    
   }
 
   render() {
-    const data = this.state.play;
-
-    // test array:
-    // let team = [
-    //   {'id' : 2, 'name': 'Groot', 'avatar': 'icofont-bat', 'score': 8 },
-    //   {'id' : 3, 'name': 'Star-lord','avatar': 'icofont-pineapple','score': 2},
-    //   {'id' : 4, 'name': 'Gamora','avatar': 'icofont-butterfly','score': 5}
-    // ]
-  
-    console.log('team=',team)
-    console.log('data=',data)
+    const players = this.state.players;
     
     return (
       <div id="CardsRow" className="cardsrow center-col background-eee marg-bottom-20">
-        {data.map(
+        {players.map(
           (card, i) =>
             <Card 
               key={card.name}
