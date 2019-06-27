@@ -20,10 +20,10 @@ export function connectToSocket(){
 export function parseMessage(currentState, newPlayerAction, myUser){
   const type = newPlayerAction.type;
   const id = newPlayerAction.id;
+  const score = newPlayerAction.score;
+  const admin = newPlayerAction.admin;
   const socket = new WebSocket('wss://sp-websocket.herokuapp.com', window.location.hash);
   
-  console.log('>>>>>>>>>>> type:', type);
-
   let players = currentState;
   switch (type) {
     case 'hello-user':
@@ -37,15 +37,17 @@ export function parseMessage(currentState, newPlayerAction, myUser){
           };
         }
       break;
-
     case 'hello-user-response':
-        players = mergeArray(currentState, newPlayerAction);
+        players = updatePlayers(currentState, newPlayerAction);
         break;
-
     case 'vote':
-      let score = newPlayerAction.score;
-
-      players = currentState;    
+      players = updatePlayers(currentState, newPlayerAction);
+      console.log('Incoming Vote', score)
+      break;
+    case 'claim-admin':
+        players = updatePlayers(currentState, { admin: false });
+        players = updatePlayers(currentState, newPlayerAction);
+        console.log('Incoming Admin', admin)
       break;
     default:
       players = [myUser];
@@ -53,15 +55,18 @@ export function parseMessage(currentState, newPlayerAction, myUser){
   return players;
 }
 
-function mergeArray(src, newPlayerAction) {
-  const srcClone = src.slice();   // clone original source array
-  const found = srcClone.find(el => el.id === newPlayerAction.id);
-  console.log('>>>>>>>>>>> srcClone:', srcClone);
-  console.log('>>>>>>>>>>> found:', found);
-  if (found){
-    Object.assign(found, newPlayerAction);
+function updatePlayers(currentPlayers, newPlayerData) {
+  const srcClone = currentPlayers.slice();   // clone original source array
+  if (newPlayerData.id) {
+    const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set
+    if (existingPlayer){
+      Object.assign(existingPlayer, newPlayerData);
+    } else {
+      srcClone.push(newPlayerData);
+    }
   } else {
-    srcClone.push(newPlayerAction);
+    srcClone.forEach(player => Object.assign(player, newPlayerData)); // utility functions for all players
   }
+  
   return srcClone;
 }

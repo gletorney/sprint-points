@@ -90,7 +90,7 @@ class App extends React.Component {
           </main>
         </div>
         {readyToPlay ? ( 
-          <Footer /> 
+          <Footer myUser={this.state.me} /> 
         ) : (  
           <LogInModal onAddUser={this.helloUser} /> 
         )}
