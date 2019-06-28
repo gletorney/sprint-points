@@ -24,6 +24,8 @@ export function parseMessage(currentState, newPlayerAction, myUser){
   const admin = newPlayerAction.admin;
   const socket = new WebSocket('wss://sp-websocket.herokuapp.com', window.location.hash);
   
+  console.log('-- type: ', type)
+
   let players = currentState;
   switch (type) {
     case 'hello-user':
@@ -42,12 +44,18 @@ export function parseMessage(currentState, newPlayerAction, myUser){
         break;
     case 'vote':
       players = updatePlayers(currentState, newPlayerAction);
-      console.log('Incoming Vote', score)
+      // console.log('Incoming Vote', score)
       break;
     case 'claim-admin':
         players = updatePlayers(currentState, { admin: false });
         players = updatePlayers(currentState, newPlayerAction);
-        console.log('Incoming Admin', admin)
+      break;
+    case 'show-all-scores':
+        players = 'show-all-scores';
+        console.log('show-all-scores');
+        break;
+    case 'rest-all-scores':
+      players = updatePlayers(currentState, { score: false });
       break;
     default:
       players = [myUser];
@@ -70,3 +78,13 @@ function updatePlayers(currentPlayers, newPlayerData) {
   
   return srcClone;
 }
+
+export function checkForAdminChange(myId, players){
+  let match;
+  players.forEach(function(player){
+    if (player.admin && player.id === myId){
+      match = 1;
+    }
+  });
+  return match;
+};

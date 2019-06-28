@@ -8,6 +8,7 @@ class Header extends React.Component {
 
   render() {
     const { myUser } = this.props;
+
     return (
       <React.Fragment>
         <header className="border-bottom-1-ccc">

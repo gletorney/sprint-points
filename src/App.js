@@ -16,7 +16,7 @@ class App extends React.Component {
     this.state = { 
       board: [],
       isVoting: 'on',
-      isAdmin: 'off',
+      isAdmin: 0,
       me: myUser,
       team: '',
     };
@@ -85,7 +85,10 @@ class App extends React.Component {
               myUser={myUser}
               onEditUser={this.handleEditUser}
             />
-            <CardSet myUser={myUser} socket={this.socket} board={this.state.board} votingState={this.state.isVoting} />
+            <CardSet 
+              myUser={myUser} 
+              board={this.state.board} 
+              votingState={this.state.isVoting} />
             <VotingPanel socket={this.socket} myUser={this.state.me} />
           </main>
         </div>
