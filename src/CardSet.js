@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { fetchMyUser, parseMessage } from './utils';
+import { parseMessage } from './utils';
 import ToggleScoresButton from './ToggleScoresButton';
 
 class CardSet extends React.Component {
@@ -18,15 +18,10 @@ class CardSet extends React.Component {
     const socket = window.socket;     
     if (socket){
       socket.onmessage = (event) => {
-        let myUser;
-        myUser = this.props.myUser;
-        if (!myUser.name){
-          myUser = fetchMyUser();
-        }
         const newPlayerAction = JSON.parse(event.data);
         this.setState((prevState) => {
           const currentPlayers = prevState.players;
-          const players = parseMessage(currentPlayers, newPlayerAction, myUser);
+          const players = parseMessage(currentPlayers, newPlayerAction);
           if (players === 'show-all-scores'){
             return { showScores: 1 }
           } else  if (players === 'reset-all-scores-ready'){

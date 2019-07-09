@@ -16,9 +16,10 @@ class Init extends React.Component {
   }
 
   handleRefresh = () =>{
-    let status = window.socket.readyState;
-    let newDate = new Date();
+    // console.log('HandleRefresh')
     if (this.state.status !== 1){
+      let status = window.socket.readyState;
+      let newDate = new Date();
       this.setState({ 
         refresh: newDate,
         status: status

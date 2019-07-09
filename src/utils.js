@@ -7,6 +7,7 @@ export function fetchMyUser(){
     name: myName,
     avatar: myAvatar,
   };
+  window.myUser = myUser;
   return myUser
 };
 
@@ -17,40 +18,48 @@ export function connectToSocket(){
   } 
 };
 
-export function parseMessage(currentState, newPlayerAction, myUser){
-
-  const socket = new WebSocket('wss://sp-websocket.herokuapp.com', window.location.hash);
+export function parseMessage(currentState, newPlayerAction){
 
   const type = newPlayerAction.type;
   const id = newPlayerAction.id;
+  const myUser = window.myUser;
   let players = currentState;
 
   console.log('Ping Type = ',type)
+
+  // console.log('Players=', players)
+  // console.log('id = ',newPlayerAction.id)
+  // console.log('myUser = ',myUser)
+   console.log('newPlayerAction = ',newPlayerAction)
+  // console.log('currentState = ',currentState)
   // console.log('myUser = ',myUser)
   // console.log('newPlayerAction = ',newPlayerAction)
   // console.log('currentState = ',currentState)
   
   switch (type) {
     case 'hello-user':
-      if (id !== myUser.id){
-        console.log('test')
+      if (myUser.id && (id !== myUser.id)){
         players = updatePlayers(currentState, newPlayerAction);
-        socket.onopen = function (event) {
-          socket.send(
-            JSON.stringify(
-                { ...myUser, type: 'hello-user-response' }
-              )
+        window.socket.send(
+          JSON.stringify(
+              { ...myUser, type: 'hello-response' }
             )
-        };
+          )
       } else {
         players = [myUser];
       }
       break;
-    case 'hello-user-response':
+    case 'hello-response':
         players = updatePlayers(currentState, newPlayerAction);
-      break;
+        let checkPlayers = players[0];
+        if (!checkPlayers.name){
+          players = [myUser];
+          console.log('Only me')
+        }
+        break;
     case 'logout-user':
       players = removePlayers(currentState, newPlayerAction);
+      //players = updatePlayers(currentState, newPlayerAction);
       break;
     case 'vote':
       players = updatePlayers(currentState, newPlayerAction);
@@ -71,31 +80,35 @@ export function parseMessage(currentState, newPlayerAction, myUser){
     default:
       players = [myUser];
     }
-    // console.log('Players=', players)
     return players;
 }
 
 function updatePlayers(currentPlayers, newPlayerData) {
   const srcClone = currentPlayers.slice();   // clone original source array
-  if (newPlayerData.id) {
-    const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set
-    if (existingPlayer){
-      Object.assign(existingPlayer, newPlayerData);
+  if (srcClone[0].id){
+    if (newPlayerData.id) {
+      const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set
+      if (existingPlayer){
+        Object.assign(existingPlayer, newPlayerData);
+      } else {
+        srcClone.push(newPlayerData);
+      }
     } else {
-      srcClone.push(newPlayerData);
+      srcClone.forEach(player => Object.assign(player, newPlayerData)); // utility functions for all players
     }
-  } else {
-    srcClone.forEach(player => Object.assign(player, newPlayerData)); // utility functions for all players
   }
   return srcClone;
 }
 
-function removePlayers(currentPlayers, newPlayerData) {
+function removePlayers(currentPlayers, deletedPlayer) {
   const srcClone = currentPlayers.slice();   // clone original source array
-  const deleteId = newPlayerData.id;
-  const deletedClone = delete srcClone[deleteId];
-  console.log('deletedClone==',deletedClone);
-  return deletedClone;
+  srcClone.forEach(function(thisPlayer, i){
+    if (thisPlayer.id === deletedPlayer.id){
+      delete srcClone[i];
+    }
+    console.log('thisPlayer ID = ',thisPlayer.id,' -- deltedPlayer ID=',deletedPlayer.id)
+  });
+  return srcClone;
 }
 
 export function checkForAdminChange(myId, players){

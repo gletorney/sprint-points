@@ -4,14 +4,14 @@ import './loading.css';
 class Connecting extends React.Component {
 
   componentDidMount() {
-    setInterval(
-      () => this.handleRefresh(),
-      1000
-    );
+    this.handleRefresh()
   }
 
   handleRefresh() {
-    this.props.onRefresh();
+    setInterval(
+      () => this.props.onRefresh(),
+      1000
+    );
   }
 
   render() {
