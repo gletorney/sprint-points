@@ -22,7 +22,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     //Check for returning user
     let me = this.state.me;
     if (this.state.me.name && window.socket){
@@ -34,7 +34,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidUpdate(){
+  componentDidUpdate = () => {
     if (this.state.alert){
       let alertDiv = document.getElementById('Alert');
       alertDiv.style.bottom = '10px';
@@ -65,7 +65,8 @@ class App extends React.Component {
       }
     }
     this.setState({ 
-      me: myUser
+      me: myUser,
+      alert: 'Hey there.'
     });
   }
 
@@ -79,7 +80,8 @@ class App extends React.Component {
       )
     }
     this.setState({ 
-      me: ''
+      me: '',
+      alert: 'See ya later'
     });
     window.localStorage.removeItem('id'); 
     window.localStorage.removeItem('name'); 
