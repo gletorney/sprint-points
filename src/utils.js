@@ -13,7 +13,7 @@ export function fetchMyUser(){
 
 export function connectToSocket(){
   if (window.location.hash){
-    let socket = new WebSocket('wss://sp-websocket.herokuapp.com', window.location.hash);
+    let socket = new WebSocket('wss://sp-websocket.herokuapp.com', [window.location.hash]);
     return socket;
   } 
 };
@@ -25,12 +25,12 @@ export function parseMessage(currentState, newPlayerAction){
   const myUser = window.myUser;
   let players = currentState;
 
-  console.log('Ping Type = ',type)
+  console.log('Ping type = ',type)
 
   // console.log('Players=', players)
   // console.log('id = ',newPlayerAction.id)
   // console.log('myUser = ',myUser)
-   console.log('newPlayerAction = ',newPlayerAction)
+  // console.log('newPlayerAction = ',newPlayerAction)
   // console.log('currentState = ',currentState)
   // console.log('myUser = ',myUser)
   // console.log('newPlayerAction = ',newPlayerAction)
@@ -59,7 +59,6 @@ export function parseMessage(currentState, newPlayerAction){
         break;
     case 'logout-user':
       players = removePlayers(currentState, newPlayerAction);
-      //players = updatePlayers(currentState, newPlayerAction);
       break;
     case 'vote':
       players = updatePlayers(currentState, newPlayerAction);
@@ -85,7 +84,7 @@ export function parseMessage(currentState, newPlayerAction){
 
 function updatePlayers(currentPlayers, newPlayerData) {
   const srcClone = currentPlayers.slice();   // clone original source array
-  if (srcClone[0].id){
+  if (srcClone[0] !== null){
     if (newPlayerData.id) {
       const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set
       if (existingPlayer){
