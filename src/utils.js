@@ -26,9 +26,9 @@ export function parseMessage(currentState, newPlayerAction, myUser){
   let players = currentState;
 
   console.log('Ping Type = ',type)
-  console.log('myUser = ',myUser)
-  console.log('newPlayerAction = ',newPlayerAction)
-  console.log('currentState = ',currentState)
+  // console.log('myUser = ',myUser)
+  // console.log('newPlayerAction = ',newPlayerAction)
+  // console.log('currentState = ',currentState)
   
   switch (type) {
     case 'hello-user':
@@ -47,11 +47,7 @@ export function parseMessage(currentState, newPlayerAction, myUser){
       }
       break;
     case 'hello-user-response':
-        if (currentState.id){
-          players = updatePlayers(currentState, newPlayerAction);
-        } else {
-          players = updatePlayers([myUser], newPlayerAction);
-        }
+        players = updatePlayers(currentState, newPlayerAction);
       break;
     case 'logout-user':
       players = removePlayers(currentState, newPlayerAction);
@@ -75,7 +71,7 @@ export function parseMessage(currentState, newPlayerAction, myUser){
     default:
       players = [myUser];
     }
-    console.log('Players=', players)
+    // console.log('Players=', players)
     return players;
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { fetchMyUser, connectToSocket } from './utils';
+import { fetchMyUser } from './utils';
 import Header from './Header';
-import TeamMenu from './TeamMenu';
 import CardSet from './CardSet';
 import Footer from './Footer';
 import LogInModal from './LogInModal';
@@ -19,37 +18,35 @@ class App extends React.Component {
       me: myUser,
       team: '',
     };
-    window.socket = connectToSocket();
   }
 
   componentDidMount() {
     //Init returning user
     let me = this.state.me;
     if (this.state.me.name && window.socket){
-      console.log('Did Mount')
-      window.socket.onopen = function (event) {
-        this.send(
-          JSON.stringify(
-            { ...me, type: 'hello-user' }
-          )
+      window.socket.send(
+        JSON.stringify(
+          { ...me, type: 'hello-user' }
         )
-      };
-    }
+      )
+    };
   }
 
   helloUser = () => {
     //Init new user
     const myUser = fetchMyUser();
     console.log('Hello User')
-    if (window.socket.readyState === 1){
-      window.socket.send(
-        JSON.stringify(
-          { ...myUser, type: 'hello-user' }
-        )
-      );
-    } else {
-      console.log('TRYING AGAIN')
-      this.helloUser();
+    if (window.socket){
+      if (window.socket.readyState === 1){
+        window.socket.send(
+          JSON.stringify(
+            { ...myUser, type: 'hello-user' }
+          )
+        );
+      } else {
+        console.log('TRYING AGAIN')
+        this.helloUser();
+      }
     }
     this.setState({ 
       me: myUser
@@ -103,10 +100,6 @@ class App extends React.Component {
             myUser={myUser}
             onLogout={this.handleLogout} />
           <main className="row">
-            <TeamMenu 
-              team={this.state.board}
-              myUser={myUser}
-            />
             <CardSet 
               myUser={myUser} 
               board={this.state.board} 

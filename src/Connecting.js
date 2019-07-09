@@ -11,19 +11,19 @@ class Connecting extends React.Component {
   }
 
   handleRefresh() {
-    this.props.onRefresh()
+    this.props.onRefresh();
   }
 
   render() {
     return (
       <React.Fragment>
-        <div className="overlay background-111">
-				  <div className="modal background-111">
+        <div className="overlay background-eee">
+				  <div className="modal background-eee">
             <div className="text-center pad-20">
               <div className="pad-bottom-20">
-                <div className="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                <div className="lds-grid background-eee"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
               </div>
-              <div className="color-white">
+              <div className="color-fff">
                 Aligning satellites
               </div>
             </div>

@@ -40,18 +40,15 @@ class CardSet extends React.Component {
   }
 
   handleToggleScore = (s) => {
-    const socket = window.socket;
     let payLoad;
     if (s){
       payLoad = 'show-all-scores'
     } else {
       payLoad = 'reset-all-scores'
     }
-    socket.onopen = function (event) {
-      socket.send(
-        JSON.stringify({ type: payLoad })
-        )
-    };
+    window.socket.send(
+      JSON.stringify({ type: payLoad })
+      )
   }
 
   render() {
@@ -64,13 +61,13 @@ class CardSet extends React.Component {
     };
       
     return (
-      <div id="CardsRow" className="center-col background-eee marg-bottom-20">
+      <div id="CardsRow" className="center-col background-eee marg-bottom-10">
         {adminButton}
         <div className="cardsrow">
           {players.map(
             (card, i) =>
               <Card 
-                key={card.name}
+                key={card.id}
                 id={card.id}
                 name={card.name}
                 avatar={card.avatar}

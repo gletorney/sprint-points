@@ -8,28 +8,36 @@ class Init extends React.Component {
     super(props);
     let newDate = new Date()
     this.state = {
-      refresh: newDate
+      refresh: newDate,
+      status: ''
     };
+    window.socket = connectToSocket();
+    window.team = window.location.hash;
   }
 
   handleRefresh = () =>{
-    let newDate = new Date()
-    this.setState({ 
-      refresh: newDate
-    });
+    let status = window.socket.readyState;
+    let newDate = new Date();
+    if (this.state.status !== 1){
+      this.setState({ 
+        refresh: newDate,
+        status: status
+      });
+      console.log('Refreshing, status = ', status)
+    }
   }
   
   render() {
-    const socket = connectToSocket();
-    if (socket){
-      if (socket.readyState > 1) {
-        return <Connecting onRefresh={this.handleRefresh} />;
+    if (window.socket && window.team){
+      if (window.socket.readyState === 1) {
+        return <App />;
       } else {
-        return <App onSocketClosed={this.handleRefresh} />;
+        return <Connecting onRefresh={this.handleRefresh} />;
       }
+    } else if (!window.team){
+      return <App />;
     } else {
-      //setup new user
-      return <App onSocketClosed={this.handleRefresh} />;
+      return <Connecting onRefresh={this.handleRefresh} />;
     }
   }
 }
