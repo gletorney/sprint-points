@@ -66,7 +66,7 @@ class App extends React.Component {
     }
     this.setState({ 
       me: myUser,
-      alert: 'Hey there.'
+      alert: 'Welcome'
     });
   }
 
