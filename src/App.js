@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchMyUser,connectToSocket } from './utils';
+import { fetchMyUser, connectToSocket } from './utils';
 import Header from './Header';
 import TeamMenu from './TeamMenu';
 import CardSet from './CardSet';
@@ -11,7 +11,6 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    //me
     const myUser = fetchMyUser();
     this.state = { 
       board: [],
@@ -20,48 +19,70 @@ class App extends React.Component {
       me: myUser,
       team: '',
     };
-
-    this.socket = connectToSocket();    
+    window.socket = connectToSocket();
   }
 
   componentDidMount() {
-    const me = this.state.me;
-    this.socket.onopen = function (event) {
-      this.send(
-        JSON.stringify(
+    //Init returning user
+    let me = this.state.me;
+    if (this.state.me.name && window.socket){
+      console.log('Did Mount')
+      window.socket.onopen = function (event) {
+        this.send(
+          JSON.stringify(
             { ...me, type: 'hello-user' }
           )
         )
-    };
+      };
+    }
   }
 
-  helloUser = (userId, userName, userAvatar) => {
-    let updatedUser = {
-      type: 'hello-user',
-      id: userId,
-      name: userName,
-      avatar: userAvatar
+  helloUser = () => {
+    //Init new user
+    const myUser = fetchMyUser();
+    console.log('Hello User')
+    if (window.socket.readyState === 1){
+      window.socket.send(
+        JSON.stringify(
+          { ...myUser, type: 'hello-user' }
+        )
+      );
+    } else {
+      console.log('TRYING AGAIN')
+      this.helloUser();
     }
     this.setState({ 
-      me: updatedUser      
+      me: myUser
     });
-    let socket = this.socket;
-    socket.onopen = function (event) {
-      socket.send(JSON.stringify(updatedUser));
-    };
   }
 
-  handleEditUser = () => {
+  handleLogout = () => {
+    const myUser = fetchMyUser();
+    if (window.socket){
+      window.socket.onopen = function (event) {
+        this.send(
+          JSON.stringify(
+            { ...myUser, type: 'logout-user' }
+          )
+        )
+      };
+    }
     this.setState({ 
-      editUser: 1
+      me: ''
     });
+    window.localStorage.removeItem('id'); 
+    window.localStorage.removeItem('name'); 
+    window.localStorage.removeItem('avatar'); 
   }
 
   sendPing = (myUser) => {
-    let socket = this.socket;
-    socket.onopen = function (event) {
-      socket.send(JSON.stringify(myUser));
-    };
+    if (window.socket){
+      window.socket.onopen = function (event) {
+        window.socket.send(
+          JSON.stringify(myUser)
+        );
+      };
+    }
   }
 
   render() {
@@ -78,18 +99,20 @@ class App extends React.Component {
     return (
       <div>
         <div className="app-board">
-          <Header myUser={myUser}/>
+          <Header 
+            myUser={myUser}
+            onLogout={this.handleLogout} />
           <main className="row">
             <TeamMenu 
               team={this.state.board}
               myUser={myUser}
-              onEditUser={this.handleEditUser}
             />
             <CardSet 
               myUser={myUser} 
               board={this.state.board} 
               votingState={this.state.isVoting} />
-            <VotingPanel socket={this.socket} myUser={this.state.me} />
+            <VotingPanel 
+              myUser={this.state.me} />
           </main>
         </div>
         {readyToPlay ? ( 

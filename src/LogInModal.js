@@ -15,8 +15,8 @@ class LogInModal extends React.Component {
     this.setState({ team });
   }
 
-  handleAddUser = (userId, userName, userAvatar) => {
-    this.props.onAddUser(userId, userName, userAvatar);
+  handleAddUser = () => {
+    this.props.onAddUser();
   }
 
   render() {

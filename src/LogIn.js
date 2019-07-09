@@ -3,24 +3,10 @@ import SelectIcon from './SelectIcon';
 
 class LogIn extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: '',
-      name: '',
-      avatar: ''
-    };
-  }
-
   createUser = () => {
     let nameValue = document.getElementById('NameInput').value;
     let avatarValue = document.getElementById('AvatarInput').value;
     let userId = new Date().getTime(); 
-    this.setState({
-      id: userId,
-      name: nameValue,
-      avatar: avatarValue
-    });
 
     if (nameValue.length < 1){
       let elem = document.querySelector("#NameInput");

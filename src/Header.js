@@ -2,8 +2,8 @@ import React from 'react';
 
 class Header extends React.Component {
   
-  handleEditUser = () => {
-    this.props.onEditUser();
+  handleLogout = () => {
+    this.props.onLogout();
   }
 
   render() {
@@ -15,7 +15,7 @@ class Header extends React.Component {
           <h1 className="pad-10">Sprint points</h1>
         </header>
         <div className="border-bottom-1-ccc pad-10">
-            Hello {myUser.name} <span onClick={this.handleEditUser} className="color-blue cursor-pointer">edit</span>
+            Hello {myUser.name} <span onClick={this.handleLogout} className="color-blue cursor-pointer float-right">Logout</span>
         </div>
       </React.Fragment>
     )

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import App from './App';
+import Init from './Init';
 import './App.css';
 import './Icofont.min.css';
 
 ReactDOM.render(
-  <App />, 
+  <Init />, 
   document.getElementById('root')
 );
 

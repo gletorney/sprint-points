@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { parseMessage,connectToSocket } from './utils';
-import { checkForAdminChange } from './utils';
+import { fetchMyUser, parseMessage } from './utils';
 import ToggleScoresButton from './ToggleScoresButton';
 
 class CardSet extends React.Component {
@@ -16,25 +15,32 @@ class CardSet extends React.Component {
   }
 
   componentDidMount() {
-    const socket = connectToSocket(); 
-    const myUser = this.props.myUser;
-    socket.onmessage = (event) => {
-      const newPlayerAction = JSON.parse(event.data);
-      this.setState((prevState) => {
-        const currentPlayers = prevState.players;
-        const players = parseMessage(currentPlayers, newPlayerAction, myUser);
-        if (players == 'show-all-scores'){
-          return { showScores: 1 }
-        } else {
-          return { players }
+    const socket = window.socket;     
+    if (socket){
+      socket.onmessage = (event) => {
+        let myUser;
+        myUser = this.props.myUser;
+        if (!myUser.name){
+          myUser = fetchMyUser();
         }
-      })
-    };
+        const newPlayerAction = JSON.parse(event.data);
+        this.setState((prevState) => {
+          const currentPlayers = prevState.players;
+          const players = parseMessage(currentPlayers, newPlayerAction, myUser);
+          if (players === 'show-all-scores'){
+            return { showScores: 1 }
+          } else  if (players === 'reset-all-scores-ready'){
+            return { showScores: 0 }
+          } else {
+            return{ players }
+          }
+        })
+      };
+    } 
   }
 
   handleToggleScore = (s) => {
-    const socket = connectToSocket();
-    const myUser = this.props.myUser;
+    const socket = window.socket;
     let payLoad;
     if (s){
       payLoad = 'show-all-scores'
@@ -43,15 +49,15 @@ class CardSet extends React.Component {
     }
     socket.onopen = function (event) {
       socket.send(
-        JSON.stringify(
-            { ...myUser, type: payLoad }
-          )
+        JSON.stringify({ type: payLoad })
         )
     };
   }
 
   render() {
     const players = this.state.players;
+    const showScores = this.state.showScores;
+
     let adminButton;
     if (this.props.myUser.admin){
       adminButton = <ToggleScoresButton onToggleScore={this.handleToggleScore}/>;
@@ -69,7 +75,7 @@ class CardSet extends React.Component {
                 name={card.name}
                 avatar={card.avatar}
                 score={card.score}
-                showScore={this.state.showScores}
+                showScores={showScores}
                 />
           )}
         </div>
