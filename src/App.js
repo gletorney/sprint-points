@@ -15,9 +15,10 @@ class App extends React.Component {
       board: [],
       isVoting: 'on',
       isAdmin: 0,
+      adminName: '',
       me: myUser,
       team: '',
-      alert:''
+      alert: ''
     };
   }
 
@@ -35,9 +36,16 @@ class App extends React.Component {
 
   componentDidUpdate(){
     if (this.state.alert){
-      let alertDiv = document.getElementsById('alert');
-      alertDiv.style.display = 'block';
-      this.alertApp(this.state.alert);
+      let alertDiv = document.getElementById('Alert');
+      alertDiv.style.bottom = '10px';
+      alertDiv.innerText = this.state.alert;
+      setInterval(
+        () => hideAlert(),
+        5000
+      );
+      function hideAlert(){
+        alertDiv.style.bottom = '-300px';
+      }
     }
   }
 
@@ -51,7 +59,6 @@ class App extends React.Component {
             { ...myUser, type: 'hello-user' }
           )
         );
-      this.alertApp(null);
       } else {
         this.alertApp('Lost connection');
         this.helloUser();
@@ -59,12 +66,6 @@ class App extends React.Component {
     }
     this.setState({ 
       me: myUser
-    });
-  }
-
-  alertApp(alertNotice) {
-    this.setState((prevState) => {
-      return {alert: alertNotice}
     });
   }
 
@@ -83,6 +84,15 @@ class App extends React.Component {
     window.localStorage.removeItem('id'); 
     window.localStorage.removeItem('name'); 
     window.localStorage.removeItem('avatar'); 
+  }
+
+  handleChangeAdmin = (adminName) => {
+    console.log('CLaim Admin: ',adminName)
+    let string = adminName + ' is now Admin.';
+    this.setState({ 
+      alert: string,
+      adminName: adminName
+    });
   }
 
   sendPing = (myUser) => {
@@ -116,17 +126,21 @@ class App extends React.Component {
             <CardSet 
               myUser={myUser} 
               board={this.state.board} 
-              votingState={this.state.isVoting} />
+              votingState={this.state.isVoting}
+              onChangeAdmin={this.handleChangeAdmin} />
             <VotingPanel 
               myUser={this.state.me} />
           </main>
         </div>
         {readyToPlay ? ( 
-          <Footer myUser={this.state.me} /> 
+          <Footer 
+            myUser={this.state.me} 
+            adminName={this.state.adminName} /> 
         ) : (  
-          <LogInModal onAddUser={this.helloUser} /> 
+          <LogInModal 
+            onAddUser={this.helloUser} /> 
         )}
-        <div id="Alert">{this.state.alert}</div>
+        <div id="Alert"><i className="icofont-fox"></i> {this.state.alert}</div>
       </div>
     );
   }

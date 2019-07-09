@@ -18,7 +18,7 @@ class Connecting extends React.Component {
     return (
       <React.Fragment>
         <div className="overlay background-eee">
-				  <div className="modal background-eee">
+				  <div className="pad-30 marg-top-30 background-eee">
             <div className="text-center pad-20">
               <div className="pad-bottom-20">
                 <div className="lds-grid background-eee"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>

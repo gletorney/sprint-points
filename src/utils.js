@@ -84,8 +84,6 @@ export function parseMessage(currentState, newPlayerAction){
 
 function updatePlayers(currentPlayers, newPlayerData) {
   const srcClone = currentPlayers.slice();   // clone original source array
-  console.log('srcClone = ',srcClone)
-  console.log('newPlayerData = ',newPlayerData)
   if (srcClone[0].id){
     if (newPlayerData.id) {
       const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set

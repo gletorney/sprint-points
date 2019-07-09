@@ -32,6 +32,9 @@ class CardSet extends React.Component {
               return{ players }
             }
           });
+          if (newPlayerAction.type === 'claim-admin'){
+            this.props.onChangeAdmin(newPlayerAction.name);
+          }
         };
       };
     } 

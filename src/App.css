@@ -208,15 +208,17 @@ input{
 
 #Alert{
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 200px;
+  bottom: -300px;
+  left: 50%;
+  width: 260px;
+  margin-left: -130px;
+  text-align: center;
   background-color: aquamarine;
-  padding: 20px;
-  font-size: 1.3em;
-  display: none;
+  padding: 10px 15px;
+  font-size: .9em;
   box-shadow: 0 0 4px #888;
   border-radius: 6px;
+  transition: bottom 1s ease-in-out;
 }
 
 @media only screen and (max-width: 1900px) {
