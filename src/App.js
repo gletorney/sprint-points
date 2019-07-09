@@ -17,11 +17,12 @@ class App extends React.Component {
       isAdmin: 0,
       me: myUser,
       team: '',
+      alert:''
     };
   }
 
   componentDidMount() {
-    //Init returning user
+    //Check for returning user
     let me = this.state.me;
     if (this.state.me.name && window.socket){
       window.socket.send(
@@ -32,8 +33,16 @@ class App extends React.Component {
     };
   }
 
+  componentDidUpdate(){
+    if (this.state.alert){
+      let alertDiv = document.getElementsById('alert');
+      alertDiv.style.display = 'block';
+      this.alertApp(this.state.alert);
+    }
+  }
+
   helloUser = () => {
-    //Init new user
+    //Add new user
     const myUser = fetchMyUser();
     if (window.socket){
       if (window.socket.readyState === 1){
@@ -42,13 +51,20 @@ class App extends React.Component {
             { ...myUser, type: 'hello-user' }
           )
         );
+      this.alertApp(null);
       } else {
-        console.log('TRYING AGAIN')
+        this.alertApp('Lost connection');
         this.helloUser();
       }
     }
     this.setState({ 
       me: myUser
+    });
+  }
+
+  alertApp(alertNotice) {
+    this.setState((prevState) => {
+      return {alert: alertNotice}
     });
   }
 
@@ -110,6 +126,7 @@ class App extends React.Component {
         ) : (  
           <LogInModal onAddUser={this.helloUser} /> 
         )}
+        <div id="Alert">{this.state.alert}</div>
       </div>
     );
   }

@@ -12,12 +12,14 @@ class LogIn extends React.Component {
       let elem = document.querySelector("#NameInput");
       elem.style.borderLeft = '6px solid red';
       elem.style.color = 'red';
+    } else {
+      window.localStorage.setItem('id', userId); 
+      window.localStorage.setItem('name', nameValue); 
+      window.localStorage.setItem('avatar', avatarValue); 
+  
+      this.props.onAddUser(userId, nameValue, avatarValue);
     }
-    window.localStorage.setItem('id', userId); 
-    window.localStorage.setItem('name', nameValue); 
-    window.localStorage.setItem('avatar', avatarValue); 
 
-    this.props.onAddUser(userId, nameValue, avatarValue);
   }
 
   showSelectIcon = () => {

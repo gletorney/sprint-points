@@ -19,17 +19,20 @@ class CardSet extends React.Component {
     if (socket){
       socket.onmessage = (event) => {
         const newPlayerAction = JSON.parse(event.data);
-        this.setState((prevState) => {
-          const currentPlayers = prevState.players;
-          const players = parseMessage(currentPlayers, newPlayerAction);
-          if (players === 'show-all-scores'){
-            return { showScores: 1 }
-          } else  if (players === 'reset-all-scores-ready'){
-            return { showScores: 0 }
-          } else {
-            return{ players }
-          }
-        })
+        const messageTeam = event.target.protocol;
+        if (messageTeam === window.team){
+          this.setState((prevState) => {
+            const currentPlayers = prevState.players;
+            const players = parseMessage(currentPlayers, newPlayerAction);
+            if (players === 'show-all-scores'){
+              return { showScores: 1 }
+            } else  if (players === 'reset-all-scores-ready'){
+              return { showScores: 0 }
+            } else {
+              return{ players }
+            }
+          });
+        };
       };
     } 
   }

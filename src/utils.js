@@ -84,7 +84,7 @@ export function parseMessage(currentState, newPlayerAction){
 
 function updatePlayers(currentPlayers, newPlayerData) {
   const srcClone = currentPlayers.slice();   // clone original source array
-  if (srcClone[0] !== null){
+  if (srcClone[0].id !== null){
     if (newPlayerData.id) {
       const existingPlayer = srcClone.find(el => el.id === newPlayerData.id);  // find an existing player in the set
       if (existingPlayer){
@@ -105,7 +105,6 @@ function removePlayers(currentPlayers, deletedPlayer) {
     if (thisPlayer.id === deletedPlayer.id){
       delete srcClone[i];
     }
-    console.log('thisPlayer ID = ',thisPlayer.id,' -- deltedPlayer ID=',deletedPlayer.id)
   });
   return srcClone;
 }
