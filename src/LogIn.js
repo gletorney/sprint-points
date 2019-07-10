@@ -3,6 +3,10 @@ import SelectIcon from './SelectIcon';
 
 class LogIn extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   createUser = () => {
     let nameValue = document.getElementById('NameInput').value;
     let avatarValue = document.getElementById('AvatarInput').value;
@@ -20,6 +24,13 @@ class LogIn extends React.Component {
       this.props.onAddUser(userId, nameValue, avatarValue);
     }
 
+  }
+
+  handleEnterKey = (e) => {
+    var key = e.which || e.keyCode;
+    if (key === 13) { // 13 is enter
+      this.createUser()
+    }
   }
 
   showSelectIcon = () => {
@@ -42,7 +53,7 @@ class LogIn extends React.Component {
             </div>
             &mdash;
           </div>
-          <input id="NameInput" type="text" placeholder="Your name" className="display-block"></input>
+          <input id="NameInput" type="text" onKeyUp={this.handleEnterKey} placeholder="Your name" className="display-block"></input>
           <input id="AvatarInput" type="hidden" value="icofont-pizza-slice" placeholder="avatar code (#111)" className="display-block marg-top-10"></input>
           <div className="pad-top-10 cursor-pointer line-height1-4" onClick={this.showSelectIcon}>
             <span className="font-1-6 pad-10 border-1-ccc display-inline-block rnd-button marg-top-5">

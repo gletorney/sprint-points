@@ -31,12 +31,12 @@ class Init extends React.Component {
   render() {
     if (window.socket && window.team){
       if (window.socket.readyState === 1) {
-        return <App />;
+        return <App onError={this.handleRefresh} />;
       } else {
         return <Connecting onRefresh={this.handleRefresh} />;
       }
     } else if (!window.team){
-      return <App />;
+      return <App onError={this.handleRefresh} />;
     } else {
       return <Connecting onRefresh={this.handleRefresh} />;
     }

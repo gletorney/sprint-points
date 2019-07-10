@@ -49,6 +49,10 @@ class App extends React.Component {
     }
   }
 
+  componentDidCatch = (error, info) => {
+    this.props.onError();
+  }
+
   helloUser = () => {
     //Add new user
     const myUser = fetchMyUser();
