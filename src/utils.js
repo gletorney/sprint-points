@@ -77,7 +77,10 @@ export function parseMessage(currentState, newPlayerAction){
       players = 'reset-all-scores-ready';
       resetButtonState();
       break;
-    default:
+    case 'heart-beat':
+      players = currentState;
+    break;
+        default:
       players = [myUser];
     }
     return players;
