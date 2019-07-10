@@ -42,7 +42,7 @@ export function parseMessage(currentState, newPlayerAction){
         players = updatePlayers(currentState, newPlayerAction);
         window.socket.send(
           JSON.stringify(
-              { ...myUser, type: 'hello-response' }
+              { ...myUser, type: 'hello-response', team: window.team }
             )
           )
       } else {
@@ -77,10 +77,7 @@ export function parseMessage(currentState, newPlayerAction){
       players = 'reset-all-scores-ready';
       resetButtonState();
       break;
-    case 'heart-beat':
-      players = currentState;
-    break;
-        default:
+    default:
       players = [myUser];
     }
     return players;

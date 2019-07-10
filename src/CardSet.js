@@ -19,8 +19,11 @@ class CardSet extends React.Component {
     if (socket){
       socket.onmessage = (event) => {
         const newPlayerAction = JSON.parse(event.data);
-        const messageTeam = event.target.protocol;
-        if (messageTeam === window.team && newPlayerAction.type != 'heart-beat'){
+        const messageTeam = newPlayerAction.team;
+        console.log('PING: messageTeam ',messageTeam )
+        console.log('PING: window.team ',window.team)
+        console.log('PING: newPlayerAction.type',newPlayerAction.type)
+        if ((messageTeam === window.team) && newPlayerAction.type !== 'heart-beat'){
           this.setState((prevState) => {
             const currentPlayers = prevState.players;
             const players = parseMessage(currentPlayers, newPlayerAction);
@@ -48,7 +51,10 @@ class CardSet extends React.Component {
       payLoad = 'reset-all-scores'
     }
     window.socket.send(
-      JSON.stringify({ type: payLoad })
+      JSON.stringify({ 
+        type: payLoad,
+        team: window.team
+       })
       )
   }
 

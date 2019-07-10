@@ -28,13 +28,13 @@ class App extends React.Component {
     if (this.state.me.name && window.socket){
       window.socket.send(
         JSON.stringify(
-          { ...me, type: 'hello-user' }
+          { ...me, type: 'hello-user', team: window.team }
         )
       );
       setInterval(function(){ 
         window.socket.send(
           JSON.stringify(
-            { type: 'heart-beat' }
+            { type: 'heart-beat', team: window.team }
           )
         )
       }, 10000);
@@ -67,7 +67,7 @@ class App extends React.Component {
       if (window.socket.readyState === 1){
         window.socket.send(
           JSON.stringify(
-            { ...myUser, type: 'hello-user' }
+            { ...myUser, type: 'hello-user', team: window.team }
           )
         );
       }
@@ -83,7 +83,7 @@ class App extends React.Component {
     if (window.socket){
       window.socket.send(
         JSON.stringify(
-          { ...myUser, type: 'logout-user' }
+          { ...myUser, type: 'logout-user', team: window.team }
         )
       )
     }
@@ -103,16 +103,6 @@ class App extends React.Component {
       alert: string,
       adminName: adminName
     });
-  }
-
-  sendPing = (myUser) => {
-    if (window.socket){
-      window.socket.onopen = function (event) {
-        window.socket.send(
-          JSON.stringify(myUser)
-        );
-      };
-    }
   }
 
   render() {

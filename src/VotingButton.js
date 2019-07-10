@@ -8,7 +8,8 @@ class VotingButton extends React.Component {
     var message = {
       id: this.props.myUser.id,
       score: value,
-      type: 'vote'
+      type: 'vote',
+      team: window.team
     };
     window.socket.send(
       JSON.stringify(message)

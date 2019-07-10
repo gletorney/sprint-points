@@ -209,9 +209,8 @@ input{
 #Alert{
   position: fixed;
   bottom: -300px;
-  left: 50%;
+  right: 10px;
   width: 260px;
-  margin-left: -130px;
   text-align: center;
   background-color: aquamarine;
   padding: 10px 15px;
