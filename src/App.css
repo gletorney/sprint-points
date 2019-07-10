@@ -222,6 +222,14 @@ input{
   z-index: 30000;
 }
 
+.fixed-center{
+  position: fixed;
+  width: 300px;
+  top: 30%;
+  left: 50%;
+  margin-left: -150px;
+}
+
 @media only screen and (max-width: 1900px) {
   .card{
     width: 19%;
