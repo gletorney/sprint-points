@@ -37,7 +37,7 @@ class App extends React.Component {
             { type: 'heart-beat' }
           )
         )
-      }, 3000);
+      }, 10000);
     };
   }
 

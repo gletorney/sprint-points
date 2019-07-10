@@ -20,7 +20,7 @@ class CardSet extends React.Component {
       socket.onmessage = (event) => {
         const newPlayerAction = JSON.parse(event.data);
         const messageTeam = event.target.protocol;
-        if (messageTeam === window.team){
+        if (messageTeam === window.team && newPlayerAction.type != 'heart-beat'){
           this.setState((prevState) => {
             const currentPlayers = prevState.players;
             const players = parseMessage(currentPlayers, newPlayerAction);
