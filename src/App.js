@@ -60,7 +60,9 @@ class App extends React.Component {
           )
         );
       } else {
-        this.alertApp('Lost connection');
+        this.setState({ 
+          alert: 'Lost Conection'
+        });
         this.helloUser();
       }
     }

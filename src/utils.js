@@ -69,6 +69,7 @@ export function parseMessage(currentState, newPlayerAction){
       break;  
     case 'show-all-scores':
       players = 'show-all-scores';
+      lockButtonState();
       break;
     case 'reset-all-scores':
       players = updatePlayers(currentState, { score: false });
@@ -124,6 +125,16 @@ export function resetButtonState(){
   buttons.forEach(
     function(button) {
       button.removeAttribute('style');
+      button.removeAttribute('disabled');
+    }
+  )
+};
+
+export function lockButtonState(){
+  let buttons = document.getElementsByName('score');
+  buttons.forEach(
+    function(button) {
+      button.setAttribute('disabled',true);
     }
   )
 };
