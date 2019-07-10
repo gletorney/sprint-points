@@ -30,7 +30,14 @@ class App extends React.Component {
         JSON.stringify(
           { ...me, type: 'hello-user' }
         )
-      )
+      );
+      setInterval(function(){ 
+        window.socket.send(
+          JSON.stringify(
+            { type: 'heart-beat' }
+          )
+        )
+      }, 3000);
     };
   }
 
@@ -63,11 +70,6 @@ class App extends React.Component {
             { ...myUser, type: 'hello-user' }
           )
         );
-      } else {
-        this.setState({ 
-          alert: 'Lost Conection'
-        });
-        this.helloUser();
       }
     }
     this.setState({ 

@@ -3,10 +3,6 @@ import SelectIcon from './SelectIcon';
 
 class LogIn extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   createUser = () => {
     let nameValue = document.getElementById('NameInput').value;
     let avatarValue = document.getElementById('AvatarInput').value;
