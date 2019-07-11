@@ -19,11 +19,11 @@ class Footer extends React.Component {
   }
 
   render() {
-    const isAdmin = this.props.myUser.admin
+    const isAdmin = this.props.myUser.admin;
     return (
       <div>
         {isAdmin ? (
-          <FooterAdmin adminName={this.props.adminName} onClaimAdmin={this.handleClaimAdmin}/>
+          <FooterAdmin />
         ) : (
           <FooterNotAdmin adminName={this.props.adminName} onClaimAdmin={this.handleClaimAdmin}/>
         )}
