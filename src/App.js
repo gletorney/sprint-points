@@ -94,10 +94,10 @@ class App extends React.Component {
     window.localStorage.removeItem('id'); 
     window.localStorage.removeItem('name'); 
     window.localStorage.removeItem('avatar'); 
+    window.localStorage.removeItem('admin'); 
   }
 
   handleChangeAdmin = (adminName) => {
-    console.log('CLaim Admin: ',adminName)
     let string = adminName + ' is now Admin.';
     this.setState({ 
       alert: string,

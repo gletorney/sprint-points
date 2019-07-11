@@ -2,10 +2,12 @@ export function fetchMyUser(){
   let userId = window.localStorage.getItem('id') || ''; 
   let myName = window.localStorage.getItem('name') || ''; 
   let myAvatar = window.localStorage.getItem('avatar') || ''; 
+  let admin = window.localStorage.getItem('admin') || ''; 
   const myUser = {
     id: userId,
     name: myName,
     avatar: myAvatar,
+    admin: admin
   };
   window.myUser = myUser;
   return myUser
@@ -54,7 +56,6 @@ export function parseMessage(currentState, newPlayerAction){
         let checkPlayers = players[0];
         if (!checkPlayers.name){
           players = [myUser];
-          console.log('Only me')
         }
         break;
     case 'logout-user':
@@ -110,7 +111,7 @@ function removePlayers(currentPlayers, deletedPlayer) {
   return srcClone;
 }
 
-export function checkForAdminChange(myId, players){
+export function checkAdminChange(myId, players){
   let match;
   players.forEach(function(player){
     if (player.admin && player.id === myId){

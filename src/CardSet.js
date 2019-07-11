@@ -20,14 +20,13 @@ class CardSet extends React.Component {
       socket.onmessage = (event) => {
         const newPlayerAction = JSON.parse(event.data);
         const messageTeam = newPlayerAction.team;
-        console.log('PING: messageTeam ',messageTeam )
-        console.log('PING: window.team ',window.team)
-        console.log('PING: newPlayerAction.type',newPlayerAction.type)
         if ((messageTeam === window.team) && newPlayerAction.type !== 'heart-beat'){
           this.setState((prevState) => {
             const currentPlayers = prevState.players;
             const players = parseMessage(currentPlayers, newPlayerAction);
-            if (players === 'show-all-scores'){
+            if (newPlayerAction.type === 'claim-admin'){
+              this.props.onChangeAdmin(newPlayerAction.name);
+            } else if (players === 'show-all-scores'){
               return { showScores: 1 }
             } else  if (players === 'reset-all-scores-ready'){
               return { showScores: 0 }
@@ -35,9 +34,6 @@ class CardSet extends React.Component {
               return{ players }
             }
           });
-          if (newPlayerAction.type === 'claim-admin'){
-            this.props.onChangeAdmin(newPlayerAction.name);
-          }
         };
       };
     } 
