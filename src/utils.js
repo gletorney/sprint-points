@@ -1,13 +1,17 @@
+const HEARTBEAT_INTERVAL = 5000;
+
 export function fetchMyUser(){
   let userId = window.localStorage.getItem('id') || ''; 
   let myName = window.localStorage.getItem('name') || ''; 
   let myAvatar = window.localStorage.getItem('avatar') || ''; 
   let admin = window.localStorage.getItem('admin') || ''; 
+  let hide = window.localStorage.getItem('hide') || ''; 
   const myUser = {
     id: userId,
     name: myName,
     avatar: myAvatar,
-    admin: admin
+    admin: admin,
+    hide: hide
   };
   window.myUser = myUser;
   return myUser
@@ -19,6 +23,8 @@ export function connectToSocket(){
     return socket;
   } 
 };
+
+const myHeartBeat = heartBeat();
 
 export function parseMessage(currentState, newPlayerAction){
 
@@ -37,7 +43,9 @@ export function parseMessage(currentState, newPlayerAction){
   // console.log('myUser = ',myUser)
   // console.log('newPlayerAction = ',newPlayerAction)
   // console.log('currentState = ',currentState)
-  
+
+  myHeartBeat();
+
   switch (type) {
     case 'hello-user':
       if (myUser.id && (id !== myUser.id)){
@@ -62,8 +70,9 @@ export function parseMessage(currentState, newPlayerAction){
       players = removePlayers(currentState, newPlayerAction);
       break;
     case 'vote':
-    case 'hide-card':
-      players = updatePlayers(currentState, newPlayerAction);
+      case 'hide-card':
+      case 'show-card':
+          players = updatePlayers(currentState, newPlayerAction);
       break;
     case 'claim-admin':
       players = updatePlayers(currentState, { admin: false });
@@ -72,6 +81,7 @@ export function parseMessage(currentState, newPlayerAction){
     case 'show-all-scores':
       players = 'show-all-scores';
       lockButtonState();
+      checkForMatchingScores(currentState);
       break;
     case 'reset-all-scores':
       players = updatePlayers(currentState, { score: false });
@@ -130,6 +140,8 @@ export function resetButtonState(){
       button.removeAttribute('disabled');
     }
   )
+  let cardsRow = document.getElementById('CardsRow');
+  cardsRow.removeAttribute('style');
 };
 
 export function lockButtonState(){
@@ -140,3 +152,41 @@ export function lockButtonState(){
     }
   )
 };
+
+function heartBeat() {
+  let intervalId;
+  // let lastDate;
+  return function() {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    intervalId = setInterval(() => {
+      // const now = new Date().valueOf();
+      // const dateDiff = lastDate ? now - lastDate : 'first';
+      // lastDate = now;
+      // console.log('heartBeat', dateDiff);
+      window.socket.send('');
+    }, HEARTBEAT_INTERVAL);
+  }
+}
+
+function checkForMatchingScores(players) {
+  let allScores = [];
+  players.forEach(function(player) {
+    allScores.push(player.score);
+  });
+  let equal = allScores.every( (val, i, arr) => val === arr[0] );
+  if (equal){
+    var myArray = [
+      "https://media.giphy.com/media/xTiTnmRG7QzjO9LcQw/giphy.gif",
+      "https://media.giphy.com/media/39qzxoqI9e9hH3XfiN/giphy.gif",
+      "https://media.giphy.com/media/1xNBjdWUErvYDRAM2u/giphy.gif",
+      "https://media.giphy.com/media/omx3rTJICgbE4/giphy.gif",
+      "https://media.giphy.com/media/3o85xtfl8uqoXPu3cI/giphy.gif"
+    ];
+    let randImgSrc = myArray[Math.floor(Math.random()*myArray.length)];
+    let cardsRow = document.getElementById('CardsRow');
+    cardsRow.style.backgroundImage = "url(" + randImgSrc + ")";
+    console.log(cardsRow)
+  }
+}

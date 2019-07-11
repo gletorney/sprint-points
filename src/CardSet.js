@@ -18,22 +18,24 @@ class CardSet extends React.Component {
     const socket = window.socket;     
     if (socket){
       socket.onmessage = (event) => {
-        const newPlayerAction = JSON.parse(event.data);
-        const messageTeam = newPlayerAction.team;
-        if ((messageTeam === window.team) && newPlayerAction.type !== 'heart-beat'){
-          this.setState((prevState) => {
-            const currentPlayers = prevState.players;
-            const players = parseMessage(currentPlayers, newPlayerAction);
-            if (newPlayerAction.type === 'claim-admin'){
-              this.props.onChangeAdmin(newPlayerAction.name);
-            } else if (players === 'show-all-scores'){
-              return { showScores: 1 }
-            } else  if (players === 'reset-all-scores-ready'){
-              return { showScores: 0 }
-            } else {
-              return{ players }
-            }
-          });
+        if (event && event.data){
+          const newPlayerAction = JSON.parse(event.data);
+          const messageTeam = newPlayerAction.team;
+          if (messageTeam === window.team){
+            this.setState((prevState) => {
+              const currentPlayers = prevState.players;
+              const players = parseMessage(currentPlayers, newPlayerAction);
+              if (newPlayerAction.type === 'claim-admin'){
+                this.props.onChangeAdmin(newPlayerAction.name);
+              } else if (players === 'show-all-scores'){
+                return { showScores: 1 }
+              } else  if (players === 'reset-all-scores-ready'){
+                return { showScores: 0 }
+              } else {
+                return{ players }
+              }
+            });
+          };
         };
       };
     } 

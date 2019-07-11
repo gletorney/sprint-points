@@ -135,6 +135,11 @@ input{
   flex-grow: 1;
 }
 
+#CardsRow{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .cardsrow{
   display: flex;
   flex-direction: row;
@@ -144,8 +149,8 @@ input{
 }
 
 .card{
-  margin: 10px .5%;
-  height: 200px;
+  margin: 5px .3%;
+  height: 160px;
   border: 1px solid #ccc;
   width: 18%;
   border-radius: 8px;
@@ -156,7 +161,7 @@ input{
 .card-score{
   font-size: 3em;
   font-weight: 700;
-  line-height: 100px;
+  line-height: 58px;
   text-align: center;
   border-bottom: 1px solid #ccc;
   padding: 30px;
@@ -169,8 +174,8 @@ input{
 
 .card-avatar{
   font-size: 5em;
-  height: 160px;
-  line-height: 170px;
+  height: 120px;
+  line-height: 130px;
   display: block;
   text-align: center;
 }

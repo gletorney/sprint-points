@@ -31,17 +31,6 @@ class App extends React.Component {
           { ...me, type: 'hello-user', team: window.team }
         )
       );
-      setInterval(function(){ 
-        if (window.socket.readyState === 1){
-          window.socket.send(
-            JSON.stringify(
-              { type: 'heart-beat', team: window.team }
-            )
-          )
-        } else {
-          this.props.onError();
-        }
-      }, 10000);
     };
   }
 

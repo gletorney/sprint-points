@@ -10,7 +10,7 @@ class Card extends React.Component {
     return (
       <div key={name} id={id} className='card background-fff' style={cardStyle}>
         {showScores ? (
-          <div className='card-score height-100'>{score}</div>
+          <div className='card-score'>{score}</div>
         ) : (
           <div className={score ? 'card-avatar color-red' : 'card-avatar'}><i className={avatar}></i></div>
         )}
