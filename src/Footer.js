@@ -19,7 +19,6 @@ class Footer extends React.Component {
   }
 
   render() {
-    const myUser = this.props.myUser;
     const isAdmin = this.props.myUser.admin
     return (
       <div>
