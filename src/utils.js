@@ -62,6 +62,7 @@ export function parseMessage(currentState, newPlayerAction){
       players = removePlayers(currentState, newPlayerAction);
       break;
     case 'vote':
+    case 'hide-card':
       players = updatePlayers(currentState, newPlayerAction);
       break;
     case 'claim-admin':

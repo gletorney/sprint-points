@@ -32,11 +32,15 @@ class App extends React.Component {
         )
       );
       setInterval(function(){ 
-        window.socket.send(
-          JSON.stringify(
-            { type: 'heart-beat', team: window.team }
+        if (window.socket.readyState === 1){
+          window.socket.send(
+            JSON.stringify(
+              { type: 'heart-beat', team: window.team }
+            )
           )
-        )
+        } else {
+          this.props.onError();
+        }
       }, 10000);
     };
   }
@@ -53,7 +57,7 @@ class App extends React.Component {
       function hideAlert(){
         alertDiv.style.bottom = '-300px';
       }
-    }
+    };
   }
 
   componentDidCatch = (error, info) => {

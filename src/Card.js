@@ -2,9 +2,13 @@ import React from 'react';
 
 class Card extends React.Component {
   render() {
-    const {id, name, avatar, score, showScores} = this.props;
+    const {id, name, avatar, score, showScores, hide} = this.props;
+    let cardStyle;
+    if (hide){
+      cardStyle = {display: 'none'}
+    }
     return (
-      <div key={name} id={id} className='card background-fff'>
+      <div key={name} id={id} className='card background-fff' style={cardStyle}>
         {showScores ? (
           <div className='card-score height-100'>{score}</div>
         ) : (

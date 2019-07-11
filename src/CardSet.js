@@ -76,6 +76,7 @@ class CardSet extends React.Component {
                 avatar={card.avatar}
                 score={card.score}
                 showScores={showScores}
+                hide={card.hide}
                 />
           )}
         </div>
