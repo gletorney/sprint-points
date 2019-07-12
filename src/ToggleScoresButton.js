@@ -19,7 +19,7 @@ class ToggleScoresButton extends React.Component {
 
   render() {
     return (
-      <div className="pad-10 border-bottom-1-ccc">
+      <div className="pad-10 border-bottom-1-ccc background-eee">
         Admin: 
         {this.state.toggleScores ? (
           <span onClick={this.toggleScores} className="pad-left-5 color-red float-right bold cursor-pointer display-inline-block">

@@ -15,6 +15,16 @@ class Connecting extends React.Component {
   }
 
   render() {
+    
+    const myArray = [
+      "Remember your Apple II?",
+      "Que chulo.",
+      "Bonjour.",
+      "o()xxxx[{::::::::::::::::::>",
+      "¸.·´¯`·.´¯`·.¸¸.·´¯`·.¸><(((º>"
+    ];
+    let randImgSrc = myArray[Math.floor(Math.random()*myArray.length)];
+
     return (
       <React.Fragment>
         <div className="background-eee">
@@ -24,7 +34,7 @@ class Connecting extends React.Component {
                 <div className="lds-grid background-eee"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
               </div>
               <div className="color-fff">
-                Aligning satellites
+                {randImgSrc}
               </div>
             </div>
           </div>

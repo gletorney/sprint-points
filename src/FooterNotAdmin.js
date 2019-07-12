@@ -3,7 +3,6 @@ import React from 'react';
 class FooterNotAdmin extends React.Component {
   render() {
     const hidden = this.props.hidden;
-    console.log('HIDDEN STATUS-',hidden)
     return (
       <div className="footer font-0-9">
         {hidden ? (
