@@ -173,7 +173,7 @@ function heartBeat() {
 function checkForMatchingScores(players) {
   let allScores = [];
   players.forEach(function(player) {
-    if (player.hide !== 1){
+    if ( (player.hide !== 1) && (player.score > 0) ){
       allScores.push(player.score);
     }
   });
