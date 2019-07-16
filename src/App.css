@@ -234,6 +234,36 @@ input{
   margin-left: -150px;
 }
 
+/* Themes */
+
+body.theme-1,
+body.theme-1 .card-name,
+body.theme-1 .button {
+  color: #0e7cb8; /* highlight color */
+}
+
+body.theme-1,
+body.theme-1 .background-eee {
+  background-color: #10111a; /* primary color */
+}
+
+body.theme-1 .background-fff,
+body.theme-1 .app-board {
+  background-color: #202020; /* offset color */
+}
+
+body.theme-1 .card,
+body.theme-1 .app-board {
+  box-shadow: 0 0 6px #0e7cb8; /* highlight color */
+  border-color:#0e7cb8; /* highlight color */
+}
+
+body.theme-1 .button,
+body.theme-1 .border-bottom-1-ccc {
+  border-color: #0e7cb8; /* highlight color */
+}
+
+
 @media only screen and (max-width: 1900px) {
   .card{
     width: 15%;
