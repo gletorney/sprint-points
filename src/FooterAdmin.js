@@ -8,14 +8,12 @@ class FooterAdmin extends React.Component {
         {hidden ? (
           <div>
             You are admin. Don't blow it. 
-            <span className="pad-left-5 pad-right-5">|</span>
-            <span className="color-blue cursor-pointer" onClick={this.props.onShowCard}>Show my scorecard</span>
+            <span className="color-blue cursor-pointer marg-left-20" onClick={this.props.onShowCard}>Show my scorecard</span>
           </div>
         ) : (
           <div>
             You're admin. Don't blow it. 
-            <span className="pad-left-5 pad-right-5">|</span>
-            <span className="color-blue cursor-pointer" onClick={this.props.onHideCard}>Hide my scorecard</span>
+            <span className="color-blue cursor-pointer marg-left-20" onClick={this.props.onHideCard}>Hide my scorecard</span>
           </div>
         )}
       </div>
