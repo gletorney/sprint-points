@@ -7,12 +7,12 @@ class Header extends React.Component {
     this.props.onLogout();
   }
 
-  handleTryMe = () => {
+  hangleChangeTheme = () => {
     let i = 0;
     let themes = [
+      "no-theme",
       "theme-1",
       "theme-2",
-      "no-theme",
     ];
     let body = document.getElementById('appBody');
     return () => {
@@ -21,7 +21,7 @@ class Header extends React.Component {
     }
   }
 
-  tryMe = this.handleTryMe();
+  changeTheme = this.hangleChangeTheme();
 
   render() {
     const { myUser } = this.props;
@@ -36,7 +36,7 @@ class Header extends React.Component {
             <span onClick={this.handleLogout} className="color-blue cursor-pointer float-right">
               Logout
             </span>
-            <span onClick={this.tryMe} className="marg-right-20 color-blue cursor-pointer float-right">
+            <span onClick={this.changeTheme} className="marg-right-20 color-blue cursor-pointer float-right">
               Try me
             </span>
         </div>
