@@ -180,11 +180,12 @@ function checkForMatchingScores(players) {
   let equal = allScores.every( (val, i, arr) => val === arr[0] );
   if (equal){
     var myArray = [
-      "https://media.giphy.com/media/xTiTnmRG7QzjO9LcQw/giphy.gif",
-      "https://media.giphy.com/media/39qzxoqI9e9hH3XfiN/giphy.gif",
-      "https://media.giphy.com/media/1xNBjdWUErvYDRAM2u/giphy.gif",
-      "https://media.giphy.com/media/omx3rTJICgbE4/giphy.gif",
-      "https://media.giphy.com/media/3o85xtfl8uqoXPu3cI/giphy.gif"
+      "https://media.giphy.com/media/d2ZhT90gIXiiaoq4/giphy.gif",
+      "https://media.giphy.com/media/109Ku3hdapZJle/giphy.gif",
+      "https://media.giphy.com/media/8eLojIl6PCYmY/giphy.gif",
+      "https://media.giphy.com/media/PD6f60SPwIDYs/giphy.gif",
+      "https://media.giphy.com/media/3o7WILU5d8p9xY8KFW/giphy.gif",
+      "https://media.giphy.com/media/l0Ex4roNL7aUFsgRW/giphy.gif"
     ];
     let randImgSrc = myArray[Math.floor(Math.random()*myArray.length)];
     let cardsRow = document.getElementById('CardsRow');
@@ -192,3 +193,4 @@ function checkForMatchingScores(players) {
     console.log(cardsRow)
   }
 }
+
