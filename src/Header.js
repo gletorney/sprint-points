@@ -13,6 +13,7 @@ class Header extends React.Component {
       "no-theme",
       "theme-1",
       "theme-2",
+      "theme-3",
     ];
     let body = document.getElementById('appBody');
     return () => {

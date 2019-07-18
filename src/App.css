@@ -246,14 +246,14 @@ body.theme-1 .background-eee {
 }
 
 body.theme-1,
-body.theme-2 a,
-body.theme-2 .color-blue,
+body.theme-1 a,
+body.theme-1 .color-blue,
 body.theme-1 .button {
-  color: #0f4b86; /* highlight color 1 */
+  color: #2070c0; /* highlight color 1 */
 }
 
 body.theme-1 .border-bottom-1-ccc {
-  border-color: #0f4b86; /* highlight color 1 */
+  border-color: #10385f; /* highlight color 1 */
 }
 
 body.theme-1 .card,
@@ -287,7 +287,7 @@ body.theme-2,
 body.theme-2 a,
 body.theme-2 .color-blue,
 body.theme-2 .button {
-  color: #249c5a; /* highlight color 1 */
+  color: #1c6e79; /* highlight color 1 */
 }
 
 body.theme-2 .border-bottom-1-ccc {
@@ -314,6 +314,48 @@ body.theme-2 .app-board {
 body.theme-2 .background-fff,
 body.theme-2 .app-board {
   background-color: #ccc; /* background color */
+}
+
+/* Theme-3 */
+
+body.theme-3,
+body.theme-3 .button,
+body.theme-3 .background-eee {
+  background-color: #ccc; /* primary color */
+  border-color: #bbb; /* primary color */
+}
+
+body.theme-3,
+body.theme-3 a,
+body.theme-3 .color-blue,
+body.theme-3 .button {
+  color: #d60d89; /* highlight color 1 */
+}
+
+body.theme-3 .border-bottom-1-ccc {
+  border-color: #f09cd0; /* highlight color 1 */
+}
+
+body.theme-3 .card,
+body.theme-3 .card-name,
+body.theme-3 .app-board {
+  box-shadow: 0 0 6px #d60d89; /* highlight color 2 */
+  border-color: #d60d89; /* highlight color 2 */
+  color: #d60d89; /* highlight color 2 */
+}
+
+body.theme-3 .card-name {
+  background-color: #7e0b52;
+  color: #ffffff;
+}
+
+body.theme-3 .app-board {
+  box-shadow: 0 0 6px #f187c9; /* highlight color 2 */
+}
+
+body.theme-3 .background-fff,
+body.theme-3 .app-board {
+  background-color: #eee; /* background color */
 }
 
 
