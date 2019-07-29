@@ -38,7 +38,7 @@ class Header extends React.Component {
               Logout
             </span>
             <span onClick={this.changeTheme} className="marg-right-20 color-blue cursor-pointer float-right">
-              Try me
+              Theme
             </span>
         </div>
       </React.Fragment>
