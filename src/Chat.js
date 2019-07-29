@@ -18,10 +18,11 @@ class Chat extends React.Component {
   weChat = (e) => {
     let myUser = window.myUser;
     let newMessageText = document.getElementById('ChatInput').value;
-    if(e.keyCode === 13 && !e.shiftKey){
+    var cleanText = newMessageText.replace(/(<([^>]+)>)/ig,"").trim();
+    if(cleanText.length && e.keyCode === 13 && !e.shiftKey){
       window.socket.send(
         JSON.stringify({ 
-          ...myUser, type: 'chat', chatMessage: newMessageText, team: window.team 
+          ...myUser, type: 'chat', chatMessage: cleanText, team: window.team 
         })
       )
       document.getElementById('ChatInput').placeholder = 'Sent!';
