@@ -17,11 +17,7 @@ class Connecting extends React.Component {
   render() {
     
     const myArray = [
-      "Remember your Apple II?",
-      "Que chulo.",
-      "Bonjour.",
-      "o()xxxx[{::::::::::::::::::>",
-      "¸.·´¯`·.´¯`·.¸¸.·´¯`·.¸><(((º>"
+      "Connecting..."
     ];
     let randImgSrc = myArray[Math.floor(Math.random()*myArray.length)];
 

@@ -52,8 +52,8 @@ class CardSet extends React.Component {
       JSON.stringify({ 
         type: payLoad,
         team: window.team
-       })
-      )
+      })
+    )
   }
 
   render() {
@@ -78,7 +78,7 @@ class CardSet extends React.Component {
                 avatar={card.avatar}
                 score={card.score}
                 showScores={showScores}
-                hide={card.hide}
+                hide={card.hideCard}
                 />
           )}
         </div>

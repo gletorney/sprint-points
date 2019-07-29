@@ -5,13 +5,13 @@ export function fetchMyUser(){
   let myName = window.localStorage.getItem('name') || ''; 
   let myAvatar = window.localStorage.getItem('avatar') || ''; 
   let admin = window.localStorage.getItem('admin') || ''; 
-  let hide = window.localStorage.getItem('hide') || ''; 
+  let hideCard = window.localStorage.getItem('hideCard') || ''; 
   const myUser = {
     id: userId,
     name: myName,
     avatar: myAvatar,
     admin: admin,
-    hide: hide
+    hideCard: hideCard
   };
   window.myUser = myUser;
   return myUser
@@ -89,6 +89,13 @@ export function parseMessage(currentState, newPlayerAction){
       players = 'reset-all-scores-ready';
       resetButtonState();
       break;
+    case 'chat':
+      players = updatePlayers(currentState, newPlayerAction); //maintain current player status
+      let message = newPlayerAction.chatMessage;
+      let avatar = newPlayerAction.avatar;
+      let name = newPlayerAction.name;
+      handleChatMessage(name, avatar, message);
+      break;
     default:
       players = [myUser];
     }
@@ -132,6 +139,20 @@ export function checkAdminChange(myId, players){
   return match;
 };
 
+function handleChatMessage(name, avatar, message){
+  let CurrentChatContents = document.getElementById('ChatMessageContainer').innerHTML;
+  //let nameTag = "<i class='"+avatar+"'></i> " + name + ": ";
+  let nameTag = "<u>" + name + "</u>: ";
+  let newMessage = "<div class='new-message'>" + nameTag + message + "</div>";
+  let newChatBoard = CurrentChatContents + newMessage;
+  document.getElementById('ChatMessageContainer').innerHTML = newChatBoard;
+  let newChatHeight = document.getElementById('ChatMessageContainer');
+  newChatHeight.scrollTop = newChatHeight.scrollHeight;
+
+  let chatStorageName = 'chat' + window.team;
+  window.localStorage.setItem(chatStorageName, newChatBoard); 
+};
+
 export function resetButtonState(){
   let buttons = document.getElementsByName('score');
   buttons.forEach(
@@ -173,7 +194,7 @@ function heartBeat() {
 function checkForMatchingScores(players) {
   let allScores = [];
   players.forEach(function(player) {
-    if ( (player.hide !== 1) && (player.score > 0) ){
+    if ( (player.hideCard !== 1) && (player.score > 0) ){
       allScores.push(player.score);
     }
   });

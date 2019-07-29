@@ -5,6 +5,7 @@ import CardSet from './CardSet';
 import Footer from './Footer';
 import LogInModal from './LogInModal';
 import VotingPanel from './VotingPanel';
+import Chat from './Chat';
 
 class App extends React.Component {
 
@@ -121,6 +122,7 @@ class App extends React.Component {
               board={this.state.board} 
               votingState={this.state.isVoting}
               onChangeAdmin={this.handleChangeAdmin} />
+            <Chat />
             <VotingPanel 
               myUser={this.state.me} />
           </main>
@@ -133,7 +135,9 @@ class App extends React.Component {
           <LogInModal 
             onAddUser={this.helloUser} /> 
         )}
-        <div id="Alert"><i className="icofont-fox"></i> {this.state.alert}</div>
+        <div id="Alert">
+          <i className="icofont-fox"></i> {this.state.alert}
+        </div>
       </div>
     );
   }

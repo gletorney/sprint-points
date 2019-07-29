@@ -7,6 +7,10 @@ class Header extends React.Component {
     this.props.onLogout();
   }
 
+  showMenu = () => {
+    document.getElementById('FooterMenu').style.display = 'block';
+  }
+
   hangleChangeTheme = () => {
     let i = 0;
     let themes = [
@@ -33,13 +37,18 @@ class Header extends React.Component {
           <h1 className="pad-10">Sprint points</h1>
         </header>
         <div className="border-bottom-1-ccc pad-10">
+          <span id="MyName">
             Hello {myUser.name} 
-            <span onClick={this.handleLogout} className="color-blue cursor-pointer float-right">
-              Logout
-            </span>
-            <span onClick={this.changeTheme} className="marg-right-20 color-blue cursor-pointer float-right">
-              Theme
-            </span>
+          </span>
+          <span onClick={this.handleLogout} className="color-blue cursor-pointer float-right">
+            Logout
+          </span>
+          <span onClick={this.changeTheme} className="marg-right-20 color-blue cursor-pointer float-right">
+            Theme
+          </span>
+          <span onClick={this.showMenu} className="color-blue float-right cursor-pointer marg-right-20">
+            &#9776; Options
+          </span>
         </div>
       </React.Fragment>
     )

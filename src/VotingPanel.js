@@ -8,7 +8,7 @@ class VotingPanel extends React.Component {
     const buttonList = [1,2,3,5,8,13,'—'];
 
     return (
-      <div className="right-col">
+      <div id="VotingPanel" className="right-col">
         <div className="bold font-1-3 pad-10 border-bottom-1-ccc">
           Vote
         </div>

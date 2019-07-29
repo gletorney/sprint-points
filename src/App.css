@@ -19,11 +19,12 @@ body{
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 0 12px #e5e5e5;
+  min-width: 600px;
 }
 
 .footer{
   margin: auto;
-  padding: 10px 20px;
+  padding: 0 20px;
 }
 
 h1, h2, b{
@@ -138,7 +139,7 @@ input{
 #CardsRow{
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 0 6px;
   overflow: hidden;
 }
 
@@ -213,6 +214,10 @@ input{
   padding-left: 15px;
 }
 
+#VotingPanel{
+  max-width: 180px;
+}
+
 #Alert{
   position: fixed;
   bottom: -300px;
@@ -236,11 +241,56 @@ input{
   margin-left: -150px;
 }
 
+#Chat{
+  width: 100px;
+  position: relative;
+  border-right: 1px solid #ccc;
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+
+#ChatInput{
+  margin-top: 5px;
+  width: 95%;
+  width: calc(100% - 5px);
+  padding: 5px 5px 5px 0;
+  background-color: #eee;
+  border: none;
+  border-top: 1px solid #ccc;
+  resize: none;
+  line-height: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-height: 40px;
+}
+
+#ChatMessageContainer{
+  padding: 20px 5px 0;
+  overflow-y: scroll;
+}
+
+#ChatInput:focus{
+  box-shadow: none;
+  outline: none;
+}
+
+.new-message{
+  padding-top: 4px;
+  font-size: 11px;
+}
+
+#FooterMenu{
+  display: none;
+}
+
 /* Theme-1 */
 
 body.theme-1,
 body.theme-1 .button,
-body.theme-1 .background-eee {
+body.theme-1 .background-eee,
+body.theme-1 #Chat,
+body.theme-1 #ChatInput {
   background-color: #10111a; /* primary color */
   border-color: #10111a; /* primary color */
 }
@@ -248,10 +298,12 @@ body.theme-1 .background-eee {
 body.theme-1,
 body.theme-1 a,
 body.theme-1 .color-blue,
-body.theme-1 .button {
+body.theme-1 .button,
+body.theme-1 #ChatInput {
   color: #2070c0; /* highlight color 1 */
 }
 
+body.theme-1 #ChatInput,
 body.theme-1 .border-bottom-1-ccc {
   border-color: #10385f; /* highlight color 1 */
 }
@@ -259,8 +311,8 @@ body.theme-1 .border-bottom-1-ccc {
 body.theme-1 .card,
 body.theme-1 .card-name,
 body.theme-1 .app-board {
-  box-shadow: 0 0 6px #179ab1; /* highlight color 2 */
-  border-color: #179ab1; /* highlight color 2 */
+  box-shadow: 0 0 6px #0a7183; /* highlight color 2 */
+  border-color: #096879; /* highlight color 2 */
   color: #179ab1; /* highlight color 2 */
 }
 
@@ -278,7 +330,9 @@ body.theme-1 .app-board {
 
 body.theme-2,
 body.theme-2 .button,
-body.theme-2 .background-eee {
+body.theme-2 .background-eee,
+body.theme-2 #Chat,
+body.theme-2 #ChatInput {
   background-color: #bbb; /* primary color */
   border-color: #aaa; /* primary color */
 }
@@ -286,8 +340,10 @@ body.theme-2 .background-eee {
 body.theme-2,
 body.theme-2 a,
 body.theme-2 .color-blue,
-body.theme-2 .button {
-  color: #1c6e79; /* highlight color 1 */
+body.theme-2 .button,
+body.theme-2 #Chat,
+body.theme-2 #ChatInput {
+  color: #10793f; /* highlight color 1 */
 }
 
 body.theme-2 .border-bottom-1-ccc {
@@ -297,12 +353,13 @@ body.theme-2 .border-bottom-1-ccc {
 body.theme-2 .card,
 body.theme-2 .card-name,
 body.theme-2 .app-board {
-  box-shadow: 0 0 6px #0aad53; /* highlight color 2 */
-  border-color: #0aad53; /* highlight color 2 */
+  box-shadow: 0 0 6px #35a869; /* highlight color 2 */
+  border-color: #20b463; /* highlight color 2 */
   color: #0aad53; /* highlight color 2 */
 }
 
-body.theme-2 .card-name {
+body.theme-2 .card-name,
+ {
   background-color: #0c413e;
   color: #cffde1;
 }
@@ -320,7 +377,9 @@ body.theme-2 .app-board {
 
 body.theme-3,
 body.theme-3 .button,
-body.theme-3 .background-eee {
+body.theme-3 .background-eee,
+body.theme-3 #Chat,
+body.theme-3 #ChatInput {
   background-color: #ccc; /* primary color */
   border-color: #bbb; /* primary color */
 }
@@ -328,10 +387,12 @@ body.theme-3 .background-eee {
 body.theme-3,
 body.theme-3 a,
 body.theme-3 .color-blue,
-body.theme-3 .button {
+body.theme-3 .button,
+body.theme-3 #ChatInput {
   color: #d60d89; /* highlight color 1 */
 }
 
+body.theme-3 #ChatInput,
 body.theme-3 .border-bottom-1-ccc {
   border-color: #f09cd0; /* highlight color 1 */
 }
@@ -339,7 +400,7 @@ body.theme-3 .border-bottom-1-ccc {
 body.theme-3 .card,
 body.theme-3 .card-name,
 body.theme-3 .app-board {
-  box-shadow: 0 0 6px #d60d89; /* highlight color 2 */
+  box-shadow: 0 0 6px #d455a3; /* highlight color 2 */
   border-color: #d60d89; /* highlight color 2 */
   color: #d60d89; /* highlight color 2 */
 }
