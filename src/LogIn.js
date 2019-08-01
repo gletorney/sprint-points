@@ -58,7 +58,7 @@ class LogIn extends React.Component {
             <span className="display-inline-block color-blue font-0-8 bold pad-left-10">Select Avatar</span>
           </div>
           <div className="pad-top-30 pad-bottom-10">
-            <span onClick={this.createUser} className="button block text-center">Let's play</span>
+            <span onClick={this.createUser} className="black-button block">Let's play</span>
           </div>
         </div>
         <div id="SelectIcon" className="modal large-modal">

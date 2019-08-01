@@ -55,8 +55,11 @@ class App extends React.Component {
   }
 
   helloUser = () => {
-    //Add new user
     const myUser = fetchMyUser();
+    this.setState({ 
+      me: myUser,
+      alert: 'Welcome'
+    });
     if (window.socket){
       if (window.socket.readyState === 1){
         window.socket.send(
@@ -66,10 +69,6 @@ class App extends React.Component {
         );
       }
     }
-    this.setState({ 
-      me: myUser,
-      alert: 'Welcome'
-    });
   }
 
   handleLogout = () => {

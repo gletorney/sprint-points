@@ -15,7 +15,8 @@ class VotingButton extends React.Component {
       JSON.stringify(message)
     );
     resetButtonState();
-    e.target.style.backgroundColor = '#C93A27'
+    e.target.style.backgroundColor = '#C93A27';
+    e.target.style.color = '#fff';
   }
 
   render() {
@@ -23,7 +24,7 @@ class VotingButton extends React.Component {
     const score = this.props.score;
 
     return (
-      <div className="pad-bottom-5">
+      <div>
         <button type="submit" name="score" value={score} onClick={(e) => this.sendPing(e)} className="block button font-1-2">{score}</button>
       </div>
     )

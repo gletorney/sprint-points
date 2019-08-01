@@ -108,6 +108,13 @@ class Footer extends React.Component {
     document.getElementById('FooterMenu').style.display = 'none';
   }
 
+  handleHideChat = () => {
+    document.getElementById('Chat').remove();
+    document.getElementById('VotingPanel').style.maxWidth = '100%';
+    //close modal
+    document.getElementById('FooterMenu').style.display = 'none';
+  }
+
   render() {
     const isAdmin = this.props.myUser.admin;
     const isHiddenCard = this.state.hideCard;
@@ -116,16 +123,17 @@ class Footer extends React.Component {
         {isAdmin ? (
           <FooterAdmin /> 
         ) : (
-          <FooterNotAdmin />
+          <FooterNotAdmin 
+            onClaimAdmin={this.handleClaimAdmin} />
         )}
         <FooterMenu
           admin={isAdmin} 
           onLogout={this.handleLogout}
-          onClaimAdmin={this.handleClaimAdmin}
           hiddenCard={isHiddenCard} 
           onShowCard={this.handleShowCard} 
           onHideCard={this.handleHideCard} 
           onClearChat={this.handleClearChat} 
+          onHideChat={this.handleHideChat} 
         />
       </div>
     )

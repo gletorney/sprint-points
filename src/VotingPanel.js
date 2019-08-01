@@ -3,16 +3,34 @@ import VotingButton from './VotingButton';
 
 class VotingPanel extends React.Component { 
 
+  componentDidMount(){
+    this.sizeButtons();
+  }
+
+  componentDidUpdate(){
+    this.sizeButtons();
+  }
+
+  sizeButtons = () => {
+    let rowH = document.getElementById("CardsRow").clientHeight;
+    let buttonH = rowH / 7;
+    let buttons = document.getElementsByName('score');
+    buttons.forEach(
+      function(button) {
+        button.style.height = buttonH + 'px';
+        button.dataset.height = buttonH + 'px'; //save the height for toggling style
+      }
+    )
+    document.getElementById("ChatInput").style.height = buttonH - 10 + 'px';
+  }
+
   render() {
     const myUser = this.props.myUser;
     const buttonList = [1,2,3,5,8,13,'—'];
 
     return (
       <div id="VotingPanel" className="right-col">
-        <div className="bold font-1-3 pad-10 border-bottom-1-ccc">
-          Vote
-        </div>
-        <div className="pad-10 pos-relative vote-panel">          
+        <div className="pos-relative vote-panel">          
           {buttonList.map(
             (score, i) =>
               <VotingButton 

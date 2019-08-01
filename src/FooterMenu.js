@@ -6,6 +6,10 @@ class FooterMenu extends React.Component {
     document.getElementById('FooterMenu').style.display = 'none';
   }
 
+  reloadWindow = () => {
+    window.location.reload();
+  }
+
   render() {
     const cardIsHidden = this.props.hiddenCard;
     const isAdmin = this.props.isAdmin;
@@ -14,17 +18,6 @@ class FooterMenu extends React.Component {
         <div className="modal">
           <div className="mono-titles pad-bottom-20 pad-top-20">
             Options
-          </div>
-          <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc">
-            {isAdmin ? (
-              <span className="ital">
-                You are admin
-              </span>
-            ) : (
-              <span className="color-blue cursor-pointer" onClick={this.props.onClaimAdmin}>
-                Claim admin
-              </span>
-            )}
           </div>
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc">
             {cardIsHidden ? (
@@ -37,13 +30,14 @@ class FooterMenu extends React.Component {
               </span>
             )}
           </div>
-          {/* 
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onHideChat}>
             Hide chat
           </div> 
-          */}
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onClearChat}>
             Clear chat
+          </div>
+          <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.reloadWindow}>
+            Reload board
           </div>
           <div className="pad-top-20 text-center">
             <span className="outline-button width-50" onClick={this.closeModal}>

@@ -66,7 +66,7 @@ class CardSet extends React.Component {
     };
       
     return (
-      <div id="CardsRow" className="center-col background-eee marg-bottom-10">
+      <div id="CardsRow" className="center-col background-eee">
         {adminButton}
         <div className="cardsrow">
           {players.map(

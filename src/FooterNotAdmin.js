@@ -7,6 +7,10 @@ class FooterNotAdmin extends React.Component {
         <span>
             Admin is {this.props.adminName ? this.props.adminName : '(unclaimed)'}
         </span> 
+        <span className="pad-left-10 pad-right-10">|</span>
+        <span className="color-blue cursor-pointer" onClick={this.props.onClaimAdmin}>
+          Claim admin
+        </span>
       </div>
     )
   }

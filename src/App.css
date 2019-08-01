@@ -15,16 +15,16 @@ body{
 .app-board{
   margin: 10px;
   padding: 0px;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow: hidden;
-  background-color: #fff;
+  border: 1px solid #ccc;
   box-shadow: 0 0 12px #e5e5e5;
   min-width: 600px;
 }
 
 .footer{
   margin: auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 h1, h2, b{
@@ -88,11 +88,19 @@ a{
   letter-spacing: 1px;
 }
 
-.button.block{
-  border-radius: 7px;
+#VotingPanel .button{
+  border-radius: 0;
   width: 100%;
   padding: 12px 0;
   box-sizing: border-box;
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+  background-color: #dedede;
+  color: #222;
+}
+
+#VotingPanel .button:focus{
+  outline: none;
 }
 
 .button.yellow{
@@ -109,6 +117,11 @@ a{
 
 .button:hover{
   opacity: .85;
+}
+
+.black-button.block,
+.outline-button.block{
+  display: block;
 }
 
 input{
@@ -129,7 +142,6 @@ input{
 .center-col{
   flex-grow: 5;
   max-width: 80%;
-  margin-left: 10px;
 }
 
 .right-col{
@@ -139,8 +151,8 @@ input{
 #CardsRow{
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 0 0 0 6px;
   overflow: hidden;
+  min-height: 365px;
 }
 
 .cardsrow{
@@ -190,6 +202,10 @@ input{
   background-color: #111;
 }
 
+#VotingPanel{
+  max-width: 180px;
+}
+
 .play-as-button{
   width: calc(50% - 12px);
   margin: 10px 10px 0 0;
@@ -212,10 +228,6 @@ input{
   background-color: rgb(255, 252, 75);
   color: #222;
   padding-left: 15px;
-}
-
-#VotingPanel{
-  max-width: 180px;
 }
 
 #Alert{
@@ -246,11 +258,9 @@ input{
   position: relative;
   border-right: 1px solid #ccc;
   background-color: #eee;
-  margin-bottom: 10px;
 }
 
 #ChatInput{
-  margin-top: 5px;
   width: 95%;
   width: calc(100% - 5px);
   padding: 5px 5px 5px 0;
@@ -287,7 +297,6 @@ input{
 /* Theme-1 */
 
 body.theme-1,
-body.theme-1 .button,
 body.theme-1 .background-eee,
 body.theme-1 #Chat,
 body.theme-1 #ChatInput {
@@ -298,7 +307,7 @@ body.theme-1 #ChatInput {
 body.theme-1,
 body.theme-1 a,
 body.theme-1 .color-blue,
-body.theme-1 .button,
+body.theme-1 #VotingPanel .button,
 body.theme-1 #ChatInput {
   color: #2070c0; /* highlight color 1 */
 }
@@ -320,16 +329,22 @@ body.theme-1 .app-board {
   box-shadow: 0 0 6px #125864; /* highlight color 2 */
 }
 
+body.theme-1 #VotingPanel .button,
 body.theme-1 .background-fff,
 body.theme-1 .app-board {
   background-color: #222; /* background color */
 }
 
+body.theme-1 #VotingPanel .button{
+  border-bottom: 1px solid #10385f;
+}
+
+
 
 /* Theme-2 */
 
 body.theme-2,
-body.theme-2 .button,
+body.theme-2 #VotingPanel .button,
 body.theme-2 .background-eee,
 body.theme-2 #Chat,
 body.theme-2 #ChatInput {
@@ -340,7 +355,7 @@ body.theme-2 #ChatInput {
 body.theme-2,
 body.theme-2 a,
 body.theme-2 .color-blue,
-body.theme-2 .button,
+body.theme-2 #VotingPanel .button,
 body.theme-2 #Chat,
 body.theme-2 #ChatInput {
   color: #10793f; /* highlight color 1 */
@@ -376,7 +391,7 @@ body.theme-2 .app-board {
 /* Theme-3 */
 
 body.theme-3,
-body.theme-3 .button,
+body.theme-3 #VotingPanel .button,
 body.theme-3 .background-eee,
 body.theme-3 #Chat,
 body.theme-3 #ChatInput {
@@ -387,7 +402,7 @@ body.theme-3 #ChatInput {
 body.theme-3,
 body.theme-3 a,
 body.theme-3 .color-blue,
-body.theme-3 .button,
+body.theme-3 #VotingPanel .button,
 body.theme-3 #ChatInput {
   color: #d60d89; /* highlight color 1 */
 }

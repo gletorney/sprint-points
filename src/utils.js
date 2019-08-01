@@ -159,6 +159,9 @@ export function resetButtonState(){
     function(button) {
       button.removeAttribute('style');
       button.removeAttribute('disabled');
+      let buttonH = button.dataset.height;
+      button.style.height = buttonH;
+      console.log(buttonH)
     }
   )
   let cardsRow = document.getElementById('CardsRow');
