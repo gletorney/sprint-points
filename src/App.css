@@ -13,18 +13,18 @@ body{
 }
 
 .app-board{
-  margin: 10px;
+  margin: 30px 30px 10px;
   padding: 0px;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid #ccc;
-  box-shadow: 0 0 12px #e5e5e5;
+  box-shadow: 0 0 12px #bbb;
   min-width: 600px;
 }
 
 .footer{
   margin: auto;
-  padding: 0 10px;
+  padding-left: 35px;
 }
 
 h1, h2, b{
@@ -320,7 +320,7 @@ body.theme-1 .border-bottom-1-ccc {
 body.theme-1 .card,
 body.theme-1 .card-name,
 body.theme-1 .app-board {
-  box-shadow: 0 0 6px #0a7183; /* highlight color 2 */
+  box-shadow: 0 0 6px #0a788b; /* highlight color 2 */
   border-color: #096879; /* highlight color 2 */
   color: #179ab1; /* highlight color 2 */
 }
@@ -373,8 +373,7 @@ body.theme-2 .app-board {
   color: #0aad53; /* highlight color 2 */
 }
 
-body.theme-2 .card-name,
- {
+body.theme-2 .card-name {
   background-color: #0c413e;
   color: #cffde1;
 }
@@ -448,6 +447,12 @@ body.theme-3 .app-board {
 }
 
 @media only screen and (max-width: 1200px) {
+  .app-board{
+    margin: 8px;
+  }
+  .footer{
+    padding-left: 10px;
+  }
   .card{
     width: 24%;
   }

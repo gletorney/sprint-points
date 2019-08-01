@@ -11,8 +11,9 @@ class FooterMenu extends React.Component {
   }
 
   render() {
-    const cardIsHidden = this.props.hiddenCard;
-    const isAdmin = this.props.isAdmin;
+    const isCardHidden = this.props.hiddenCard;
+    const isChatHidden = this.props.hiddenChat;
+    console.log('isChatHidden =', isChatHidden)
     return (
       <div id="FooterMenu" className="overlay">
         <div className="modal">
@@ -20,7 +21,7 @@ class FooterMenu extends React.Component {
             Options
           </div>
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc">
-            {cardIsHidden ? (
+            {isCardHidden ? (
               <span className="color-blue cursor-pointer" onClick={this.props.onShowCard}>
                 Show my card
               </span>
@@ -30,9 +31,15 @@ class FooterMenu extends React.Component {
               </span>
             )}
           </div>
-          <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onHideChat}>
-            Hide chat
-          </div> 
+          {isChatHidden ? (
+            <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onShowChat}>
+              Show chat
+            </div> 
+          ) : (
+            <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onHideChat}>
+              Hide chat
+            </div>
+          )}
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onClearChat}>
             Clear chat
           </div>

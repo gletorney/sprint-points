@@ -40,7 +40,7 @@ class CreateTeam extends React.Component {
           </div>
           <input type="text" placeholder="Team name" className="team-name-input display-block" onKeyUp={this.handleEnterKey} onChange={this.handleInput}></input>
           <div className="pad-top-30 pad-bottom-20 border-bottom-1-ccc">
-            <span onClick={this.createTeam} className="button block text-center">Create team</span>
+            <span onClick={this.createTeam} className="black-button block text-center">Create team</span>
           </div>
           <div className="pad-top-20 text-center font-0-8">
             Already have a team?<br/>

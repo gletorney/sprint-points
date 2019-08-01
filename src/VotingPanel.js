@@ -21,7 +21,10 @@ class VotingPanel extends React.Component {
         button.dataset.height = buttonH + 'px'; //save the height for toggling style
       }
     )
-    document.getElementById("ChatInput").style.height = buttonH - 10 + 'px';
+    let chatElem = document.getElementById("ChatInput");
+    if (chatElem){
+      chatElem.style.height = buttonH - 10 + 'px';
+    }
   }
 
   render() {

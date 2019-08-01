@@ -19,6 +19,7 @@ class App extends React.Component {
       adminName: '',
       me: myUser,
       team: '',
+      hideChat: 0,
       alert: ''
     };
   }
@@ -98,6 +99,10 @@ class App extends React.Component {
     });
   }
 
+  handleResetState = (newState) =>{
+    this.setState(newState);
+  }
+
   render() {
     const {
       me: myUser
@@ -107,6 +112,11 @@ class App extends React.Component {
 
     if (myUser.name && teamName && this.state.editUser !== 1){
       var readyToPlay = true
+    }
+
+    var chatState;
+    if (this.state.hideChat !== 1){
+      var chatState = <Chat />
     }
 
     return (
@@ -121,7 +131,7 @@ class App extends React.Component {
               board={this.state.board} 
               votingState={this.state.isVoting}
               onChangeAdmin={this.handleChangeAdmin} />
-            <Chat />
+            {chatState}
             <VotingPanel 
               myUser={this.state.me} />
           </main>
@@ -129,7 +139,9 @@ class App extends React.Component {
         {readyToPlay ? ( 
           <Footer 
             myUser={this.state.me} 
-            adminName={this.state.adminName} /> 
+            hideChat={this.state.hideChat} 
+            adminName={this.state.adminName}
+            resetState={this.handleResetState} /> 
         ) : (  
           <LogInModal 
             onAddUser={this.helloUser} /> 

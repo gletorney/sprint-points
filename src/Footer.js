@@ -109,15 +109,26 @@ class Footer extends React.Component {
   }
 
   handleHideChat = () => {
-    document.getElementById('Chat').remove();
+    this.props.resetState({
+      hideChat: 1,
+      alert: 'Hide that noise.'
+    });
     document.getElementById('VotingPanel').style.maxWidth = '100%';
+    //close modal
+    document.getElementById('FooterMenu').style.display = 'none';
+  }
+
+  handleShowChat = () => {
+    this.props.resetState({
+      hideChat: 0,
+      alert: 'Back in the game!'
+    });
     //close modal
     document.getElementById('FooterMenu').style.display = 'none';
   }
 
   render() {
     const isAdmin = this.props.myUser.admin;
-    const isHiddenCard = this.state.hideCard;
     return (
       <div>
         {isAdmin ? (
@@ -127,13 +138,14 @@ class Footer extends React.Component {
             onClaimAdmin={this.handleClaimAdmin} />
         )}
         <FooterMenu
-          admin={isAdmin} 
           onLogout={this.handleLogout}
-          hiddenCard={isHiddenCard} 
+          hiddenCard={this.state.hideCard} 
           onShowCard={this.handleShowCard} 
           onHideCard={this.handleHideCard} 
+          hiddenChat={this.props.hideChat} 
           onClearChat={this.handleClearChat} 
           onHideChat={this.handleHideChat} 
+          onShowChat={this.handleShowChat} 
         />
       </div>
     )
