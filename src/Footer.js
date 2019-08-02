@@ -104,6 +104,7 @@ class Footer extends React.Component {
     window.localStorage.removeItem(storageName); 
     document.getElementById('ChatMessageContainer').innerHTML = '';
     document.getElementById('ChatInput').value = '';
+    document.getElementById('ChatInput').placeholder = 'A clean slate';
     //close modal
     document.getElementById('FooterMenu').style.display = 'none';
   }

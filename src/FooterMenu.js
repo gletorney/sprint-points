@@ -41,7 +41,7 @@ class FooterMenu extends React.Component {
             </div>
           )}
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.props.onClearChat}>
-            Clear my chat history
+            Clear chat history
           </div>
           <div className="pad-top-10 pad-bottom-10 border-bottom-1-ccc color-blue cursor-pointer" onClick={this.reloadWindow}>
             Reload board
