@@ -92,9 +92,8 @@ export function parseMessage(currentState, newPlayerAction){
     case 'chat':
       players = updatePlayers(currentState, newPlayerAction); //maintain current player status
       let message = newPlayerAction.chatMessage;
-      let avatar = newPlayerAction.avatar;
       let name = newPlayerAction.name;
-      handleChatMessage(name, avatar, message);
+      handleChatMessage(name, message);
       break;
     default:
       players = [myUser];
@@ -139,18 +138,23 @@ export function checkAdminChange(myId, players){
   return match;
 };
 
-function handleChatMessage(name, avatar, message){
-  let CurrentChatContents = document.getElementById('ChatMessageContainer').innerHTML;
-  //let nameTag = "<i class='"+avatar+"'></i> " + name + ": ";
-  let nameTag = "<u>" + name + "</u>: ";
-  let newMessage = "<div class='new-message'>" + nameTag + message + "</div>";
-  let newChatBoard = CurrentChatContents + newMessage;
-  document.getElementById('ChatMessageContainer').innerHTML = newChatBoard;
-  let newChatHeight = document.getElementById('ChatMessageContainer');
-  newChatHeight.scrollTop = newChatHeight.scrollHeight;
+function handleChatMessage(name, message){
+  if (message.includes('###')){
+    if(message.includes('reload')){
+      window.location.reload();
+    }
+  } else {
+    let CurrentChatContents = document.getElementById('ChatMessageContainer').innerHTML;
+    let nameTag = "<u>" + name + "</u>: ";
+    let newMessage = "<div class='new-message'>" + nameTag + message + "</div>";
+    let newChatBoard = CurrentChatContents + newMessage;
+    document.getElementById('ChatMessageContainer').innerHTML = newChatBoard;
+    let newChatHeight = document.getElementById('ChatMessageContainer');
+    newChatHeight.scrollTop = newChatHeight.scrollHeight;
 
-  let chatStorageName = 'chat' + window.team;
-  window.localStorage.setItem(chatStorageName, newChatBoard); 
+    let chatStorageName = 'chat' + window.team;
+    window.localStorage.setItem(chatStorageName, newChatBoard); 
+  }
 };
 
 export function resetButtonState(){
