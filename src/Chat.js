@@ -9,6 +9,9 @@ class Chat extends React.Component {
 
     let oldChat = window.localStorage.getItem('chat'+window.team);
     document.getElementById('ChatMessageContainer').innerHTML = oldChat;
+
+    let newChatHeight = document.getElementById('ChatMessageContainer');
+    newChatHeight.scrollTop = newChatHeight.scrollHeight;
   }
 
   handleFirstClick = (e) => {
