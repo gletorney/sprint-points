@@ -34,6 +34,8 @@ class App extends React.Component {
         )
       );
     };
+    //Handle user leaves
+    window.addEventListener("beforeunload", this.handleUserLeaves);
   }
 
   componentDidUpdate = () => {
@@ -90,6 +92,21 @@ class App extends React.Component {
     window.localStorage.removeItem('avatar'); 
     window.localStorage.removeItem('admin'); 
   }
+
+  handleUserLeaves = e => {
+    const myUser = fetchMyUser();
+    if (window.socket){
+      window.socket.send(
+        JSON.stringify(
+          { ...myUser, type: 'logout-user', team: window.team }
+        )
+      )
+    }
+    this.setState({ 
+      me: '',
+      alert: 'See ya later'
+    });
+  };
 
   handleChangeAdmin = (adminName) => {
     let string = adminName + ' is now Admin.';
