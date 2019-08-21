@@ -165,7 +165,6 @@ export function resetButtonState(){
       button.removeAttribute('disabled');
       let buttonH = button.dataset.height;
       button.style.height = buttonH;
-      console.log(buttonH)
     }
   )
   let cardsRow = document.getElementById('CardsRow');
@@ -218,7 +217,6 @@ function checkForMatchingScores(players) {
     let randImgSrc = myArray[Math.floor(Math.random()*myArray.length)];
     let cardsRow = document.getElementById('CardsRow');
     cardsRow.style.backgroundImage = "url(" + randImgSrc + ")";
-    console.log(cardsRow)
   }
 }
 
