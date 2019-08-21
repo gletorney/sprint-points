@@ -117,6 +117,7 @@ class App extends React.Component {
   }
 
   handleResetState = (newState) =>{
+    console.log(newState)
     this.setState(newState);
   }
 
@@ -133,7 +134,7 @@ class App extends React.Component {
 
     var chatState;
     if (this.state.hideChat !== 1){
-      var chatState = <Chat />
+      chatState = <Chat />
     }
 
     return (
@@ -141,7 +142,8 @@ class App extends React.Component {
         <div className="app-board">
           <Header 
             myUser={myUser}
-            onLogout={this.handleLogout} />
+            onLogout={this.handleLogout}
+            resetState={this.handleResetState} />
           <main className="row">
             <CardSet 
               myUser={myUser} 

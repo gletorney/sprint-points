@@ -13,7 +13,7 @@ class FooterMenu extends React.Component {
   render() {
     const isCardHidden = this.props.hiddenCard;
     const isChatHidden = this.props.hiddenChat;
-    console.log('isChatHidden =', isChatHidden)
+
     return (
       <div id="FooterMenu" className="overlay">
         <div className="modal">

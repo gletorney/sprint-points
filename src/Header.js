@@ -11,6 +11,10 @@ class Header extends React.Component {
     document.getElementById('FooterMenu').style.display = 'block';
   }
 
+  handleRefresh = () => {
+    window.location.reload();
+  }
+
   hangleChangeTheme = () => {
     let i = 0;
     let themes = [
@@ -34,7 +38,11 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <header className="border-bottom-1-ccc">
-          <h1 className="pad-10">Sprint points</h1>
+          <h1 className="pad-10">
+            <span className="cursor-pointer" onClick={this.handleRefresh}>
+              Sprint points
+            </span>
+          </h1>
         </header>
         <div className="border-bottom-1-ccc pad-10">
           <span id="MyName">
