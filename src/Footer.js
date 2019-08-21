@@ -19,6 +19,7 @@ class Footer extends React.Component {
       id: this.props.myUser.id,
       name: this.props.myUser.name,
       admin: true,
+      hideCard: 1,
       type: 'claim-admin',
       team: window.team
     };
