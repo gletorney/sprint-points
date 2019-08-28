@@ -27,7 +27,7 @@ class App extends React.Component {
   componentDidMount = () => {
     //Check for returning user
     let me = this.state.me;
-    if (this.state.me.name && window.socket){
+    if (me.name && window.socket){
       window.socket.send(
         JSON.stringify(
           { ...me, type: 'hello-user', team: window.team }
