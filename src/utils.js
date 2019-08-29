@@ -69,6 +69,13 @@ export function parseMessage(currentState, newPlayerAction){
     case 'logout-user':
       players = removePlayers(currentState, newPlayerAction);
       break;
+    case 'user-leaves':
+      if (newPlayerAction.id === myUser.id){
+        let modal = document.getElementsByClassName("modal");
+        modal.style.display = 'none';
+      }
+      players = removePlayers(currentState, newPlayerAction);
+      break;
     case 'vote':
       case 'hide-card':
       case 'show-card':

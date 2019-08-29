@@ -18,14 +18,12 @@ class LogInModal extends React.Component {
   render() {
     const teamName = this.state.team;
     return ( 
-      <div className="overlay">
-        <div className="modal">
+      <div>
           {teamName ? ( 
             <LogIn onAddUser={this.props.onAddUser} />
           ) : (  
             <CreateTeam onAddTeam={this.handleAddTeam} />
           )}
-        </div>
       </div>
     )
   }

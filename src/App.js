@@ -98,7 +98,7 @@ class App extends React.Component {
     if (window.socket){
       window.socket.send(
         JSON.stringify(
-          { ...myUser, type: 'logout-user', team: window.team }
+          { ...myUser, type: 'user-leaves', team: window.team }
         )
       )
     }
@@ -117,7 +117,6 @@ class App extends React.Component {
   }
 
   handleResetState = (newState) =>{
-    console.log(newState)
     this.setState(newState);
   }
 

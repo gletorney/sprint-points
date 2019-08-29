@@ -32,7 +32,7 @@ class CreateTeam extends React.Component {
   render() {
     return (
       <div className="overlay">
-        <div className="modal">
+        <div id="CreateTeamModal" className="modal">
           <div className="mono-titles pad-bottom-20 pad-top-20">
             Create<br/> 
             a new team<br/>
