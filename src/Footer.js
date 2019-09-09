@@ -150,7 +150,7 @@ class Footer extends React.Component {
           onShowChat={this.handleShowChat} 
         />
         <div className="text-center pad-20">
-          <img src="https://files.visura.co/users/10/d8d295f39053f70c2f1ea12a1b5a7187.png" height="35" />
+          <img src="https://files.visura.co/users/10/d8d295f39053f70c2f1ea12a1b5a7187.png" height="30" />
         </div>
       </div>
     )
